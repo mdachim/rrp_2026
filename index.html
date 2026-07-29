@@ -21,13 +21,40 @@ a{color:var(--unhcr)}
 .app{max-width:1360px;margin:0 auto;background:var(--bg);min-height:100vh}
 
 /* header */
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:3px solid var(--unhcr)}
-.brand{display:flex;align-items:center;gap:10px}
-.brand .logo{width:34px;height:34px;border:2px solid var(--unhcr);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--unhcr);font-weight:800}
-.brand .lt{font-size:11px;color:var(--unhcr);font-weight:700;line-height:1.15}
-.htitle{text-align:right}
-.htitle .s{font-size:12px;color:var(--muted)}
-.htitle .t{font-size:16px;font-weight:800;color:var(--ink)}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 3px solid var(--unhcr);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+/* Control the overall height of your logo here so it fits the topbar */
+.brand .logo-img {
+  height: 40px; 
+  width: auto;
+  display: block;
+}
+
+.htitle {
+  text-align: right;
+}
+
+.htitle .s {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.htitle .t {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+}
 
 /* data-source bar */
 .srcbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 18px;background:#f8fafb;border-bottom:1px solid var(--line)}
@@ -101,9 +128,8 @@ tbody tr:nth-child(even){background:#f7fafc}
 
   <div class="topbar">
     <div class="brand">
-      <div class="logo">
-        <img src="pbi%20blue.png" alt="RRP Icon" style="height: 100%; max-height: 32px">
-      </div>
+		<img src="pbi%20blue.png" alt="Logo" class="logo-img">
+	</div>
     <div class="htitle">
       <div class="s">Ukraine Situation: Republic of Moldova</div>
       <div class="t">Refugee Response 2026: Partners' Achievements</div>
