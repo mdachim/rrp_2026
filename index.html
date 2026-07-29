@@ -95,6 +95,10 @@ tbody tr:nth-child(even){background:#f7fafc}
 .legend i{width:16px;height:10px;display:inline-block}
 @media(max-width:1100px){.grid{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.grid{grid-template-columns:1fr}}
+/* fit mode: keep desktop layout and scale to container (for iframe embeds) */
+body.fitmode{width:1360px}
+body.fitmode .app{max-width:1360px}
+body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
 </style>
 </head>
 <body>
@@ -185,11 +189,6 @@ tbody tr:nth-child(even){background:#f7fafc}
    CONFIG — edit these to match your ActivityInfo form
    ============================================================ */
 const CONFIG = {
-  activityinfo:{
-    formId:"",
-    token:"",
-    url:""
-  },
   // logical field  ->  list of possible source column names (case-insensitive).
   // The first header found in your data wins. Add your real column names here.
   // First matching header (case-insensitive) wins. Exact ActivityInfo-extract
@@ -205,6 +204,7 @@ const CONFIG = {
     outcome:   ["sector - outcome area outcome area","outcome area","outcome","objective"],
     admin1:    ["location admin 1 name","admin 1","admin1","raion","district"],
     activity:  ["project/activity title","activity 2026 activity","activity","description"],
+    projectTitle:["project/activity title","2026 project reporting form project/activity title"],
     indicator: ["indicators 2026 indicator 2026","indicator"],
     startDate: ["start date","start_date","startdate","start"],
     endDate:   ["end date","end_date","enddate","end"],
@@ -345,6 +345,7 @@ function ingest(rows){
       scope:     hm.scope?    (r[hm.scope]??"")     :"",
       admin1:    hm.admin1?   (r[hm.admin1]??"")    :"",
       activity:  hm.activity? (r[hm.activity]??"")  :"",
+      project:   hm.projectTitle?(r[hm.projectTitle]??""):"",
       indicator: hm.indicator?(r[hm.indicator]??"") :"",
       achievement:hm.achievement?(r[hm.achievement]??""):"",
       startDate: hm.startDate?(r[hm.startDate]??"") :"",
@@ -461,7 +462,12 @@ function renderAll(){
 
   hbar('chartOrg', countBy(rows,'partner'), 'partner', {scrollInner:'innerOrg',rowH:26});
   hbar('chartAgency', countBy(rows,'agency').filter(d=>d[0]&&d[0]!=='(blank)').slice(0,7), 'agency');
-  donut('chartStatus', countBy(rows,'status'));
+  // status donut: distinct projects (parent grain), not activity rows
+  const projStatus=new Map();
+  rows.forEach(r=>{ const k=r.partner+'||'+(r.project||r.activity); if(!projStatus.has(k)) projStatus.set(k,r.status||'(blank)'); });
+  const statusCounts=new Map();
+  projStatus.forEach(s=>statusCounts.set(s,(statusCounts.get(s)||0)+1));
+  donut('chartStatus', [...statusCounts.entries()].sort((a,b)=>b[1]-a[1]));
   if(F.outcome) hbar('chartOutcome', countBy(rows,'outcome'), 'outcome', {wrap:26});
   else          vbar('chartOutcome', countByArr(rows,'sectors'), 'sector');
   vbar('chartSector', partnersByArr(rows,'sectors'), 'sector');
@@ -700,9 +706,28 @@ function loadSample(){
   ingest(rows);
 }
 
+/* fit-to-width for embeds: active when in an iframe or with ?fit=1; ?fit=0 disables */
+const BASE_W=1360;
+function applyFit(){
+  const q=new URLSearchParams(location.search);
+  const embedded = window.self!==window.top;
+  const enabled = q.get('fit')==='1' || (embedded && q.get('fit')!=='0');
+  const w=document.documentElement.clientWidth;
+  if(enabled && w<BASE_W){
+    document.body.classList.add('fitmode');
+    document.body.style.zoom = w/BASE_W;
+  }else{
+    document.body.classList.remove('fitmode');
+    document.body.style.zoom='';
+  }
+  if(state.map) setTimeout(()=>state.map.invalidateSize(),50);
+}
+window.addEventListener('resize',applyFit);
+
 /* boot: prefer an external data.json (for hosted refresh), else embedded copy */
 function loadEmbedded(){ if(EMBEDDED_DATA&&EMBEDDED_DATA.length){ ingest(EMBEDDED_DATA); } else { loadSample(); } }
 async function boot(){
+  applyFit();
   if(!state.map) initMap();
   setStatus('Loading data…');
   try{
