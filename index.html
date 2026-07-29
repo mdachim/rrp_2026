@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moldova: Refugee Response 2026 — Partners' Achievements</title>
+<title>Refugee Response 2026 — Partners' Achievements (Moldova)</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -21,40 +21,12 @@ a{color:var(--unhcr)}
 .app{max-width:1360px;margin:0 auto;background:var(--bg);min-height:100vh}
 
 /* header */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 18px;
-  border-bottom: 3px solid var(--unhcr);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-}
-
-/* Control the overall height of your logo here so it fits the topbar */
-.brand .logo-img {
-  height: 40px; 
-  width: auto;
-  display: block;
-}
-
-.htitle {
-  text-align: right;
-}
-
-.htitle .s {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.htitle .t {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--ink);
-}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:3px solid var(--unhcr)}
+.brand{display:flex;align-items:center}
+.brand .logo-img{height:40px;width:auto;display:block}
+.htitle{text-align:right}
+.htitle .s{font-size:12px;color:var(--muted)}
+.htitle .t{font-size:16px;font-weight:800;color:var(--ink)}
 
 /* data-source bar */
 .srcbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 18px;background:#f8fafb;border-bottom:1px solid var(--line)}
@@ -127,9 +99,7 @@ tbody tr:nth-child(even){background:#f7fafc}
 <div class="app">
 
   <div class="topbar">
-    <div class="brand">
-		<img src="pbi%20blue.png" alt="Logo" class="logo-img">
-	</div>
+    <div class="brand"><img src="pbi%20blue.png" alt="Logo" class="logo-img"></div>
     <div class="htitle">
       <div class="s">Ukraine Situation: Republic of Moldova</div>
       <div class="t">Refugee Response 2026: Partners' Achievements</div>
@@ -138,6 +108,9 @@ tbody tr:nth-child(even){background:#f7fafc}
 
   <div class="srcbar">
     <button class="btn solid" onclick="boot()">Refresh data</button>
+    <button class="btn" onclick="document.getElementById('fileinp').click()">Load Excel / CSV / JSON…</button>
+    <input id="fileinp" type="file" accept=".xlsx,.xls,.csv,.json" style="display:none" onchange="onFile(event)">
+    <button class="btn ghost" onclick="loadSample()">Sample data</button>
     <span class="srcstat" id="srcstat">No data loaded.</span>
   </div>
 
@@ -321,13 +294,25 @@ function resolveAchievementCols(sampleRow){
 }
 const sumCols  = (r,cols)=>(cols||[]).reduce((s,c)=>s+numOf(r[c]),0);
 const anyFilled= (r,cols)=>(cols||[]).some(c=>filled(r[c]));
-// Coalesce achievement columns into one number per indicator row.
+// Coalesce achievement columns for an indicator row.
+// Refugees / Host come only from disaggregated columns; the Total column is
+// shown only when the row is NOT disaggregated (source Total achievement).
+// "" means blank in the table.
 function computeAchievement(r,m){
-  if(anyFilled(r,m.total)||anyFilled(r,m.hostTotal)) return sumCols(r,m.total)+sumCols(r,m.hostTotal);
-  if(anyFilled(r,m.refBreakdown)||anyFilled(r,m.hostBreakdown)) return sumCols(r,m.refBreakdown)+sumCols(r,m.hostBreakdown);
-  if(anyFilled(r,m.female)||anyFilled(r,m.male)||anyFilled(r,m.hostFemale)||anyFilled(r,m.hostMale))
-    return sumCols(r,m.female)+sumCols(r,m.male)+sumCols(r,m.hostFemale)+sumCols(r,m.hostMale);
-  return 0;
+  const refFilled  = anyFilled(r,m.refBreakdown)||anyFilled(r,m.female)||anyFilled(r,m.male);
+  const hostFilled = anyFilled(r,m.hostBreakdown)||anyFilled(r,m.hostFemale)||anyFilled(r,m.hostMale)||anyFilled(r,m.hostTotal);
+  const ref  = anyFilled(r,m.refBreakdown) ? sumCols(r,m.refBreakdown)
+             : refFilled ? sumCols(r,m.female)+sumCols(r,m.male) : 0;
+  const host = anyFilled(r,m.hostBreakdown) ? sumCols(r,m.hostBreakdown)
+             : (anyFilled(r,m.hostFemale)||anyFilled(r,m.hostMale)) ? sumCols(r,m.hostFemale)+sumCols(r,m.hostMale)
+             : anyFilled(r,m.hostTotal) ? sumCols(r,m.hostTotal) : 0;
+  const disagg = refFilled||hostFilled;
+  return {
+    refugees: refFilled?ref:"",
+    host:     hostFilled?host:"",
+    total:    disagg ? "" : (anyFilled(r,m.total)?sumCols(r,m.total):""),
+    grand:    disagg ? ref+host : sumCols(r,m.total)   // numeric, for internal sums
+  };
 }
 const UNHCR_BLUES=["#dbe9f6","#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#08519c","#08306b"];
 
@@ -371,17 +356,22 @@ function ingest(rows){
       isRRP:     hm.isRRP?    (r[hm.isRRP]??"")     :""
     };
     Object.keys(rec).forEach(k=>rec[k]=String(rec[k]).trim());
-    rec.achievement = computeAchievement(r, achMap);   // coalesced numeric total
+    const A=computeAchievement(r, achMap);        // refugee/host/total, ""=blank
+    rec.achievement=A.total; rec.refugees=A.refugees; rec.host=A.host; rec.grand=A.grand;
     // multi-value sectors
     rec.sectors=rec.sector?rec.sector.split(/\s*,\s*/).filter(Boolean):[];
     if(!rec.sectors.length) rec.sectors=["Not specified"];
-    // location: prefer explicit admin1, else parse Geographical Scope
-    const locSrc = rec.admin1 || rec.scope;
-    const toks = locSrc?locSrc.split(/\s*,\s*/).filter(Boolean):[];
-    const scopeToks = rec.scope?rec.scope.split(/\s*,\s*/).filter(Boolean):[];
-    rec.countrywide = toks.concat(scopeToks).some(t=>norm(t).includes("countrywide"));
+    // map location comes from the activity's Admin 1 (Report Activities);
+    // fall back to Geographical Scope only when there is no Admin 1 column.
+    const hasAdm=!!hm.admin1;
+    const admToks   = rec.admin1?rec.admin1.split(/\s*,\s*/).filter(Boolean):[];
+    const scopeToks = rec.scope ?rec.scope.split(/\s*,\s*/).filter(Boolean):[];
+    const raionToks = hasAdm?admToks:scopeToks;
     rec.raions=[]; rec.raionKeys=[];
-    toks.forEach(t=>{ const k=norm(t); if(k.includes("countrywide"))return; if(geoKeys.has(k)){rec.raions.push(geoKeys.get(k));rec.raionKeys.push(k);} });
+    raionToks.forEach(t=>{ const k=norm(t); if(k.includes("countrywide"))return; if(geoKeys.has(k)){rec.raions.push(geoKeys.get(k));rec.raionKeys.push(k);} });
+    // country-wide = project scope is country-wide AND this activity has no specific raion
+    const scopeCW=scopeToks.some(t=>norm(t).includes("countrywide"));
+    rec.countrywide = scopeCW && rec.raions.length===0;
     return rec;
   });
   // detect granularity: Report Activities export has outcome/indicator/achievement/admin1
@@ -464,13 +454,11 @@ function renderAll(){
   setText('subAgency','# of '+U+' by mandating agency');
   setText('subStatus','# of projects by status');
 
-  const achTotal=F.achievement?rows.reduce((s,r)=>s+(parseFloat(r.achievement)||0),0):null;
   document.getElementById('overviewText').textContent =
-    `Currently showing ${rows.length} ${U} from ${distinct(rows,'partner')} partners, `+
+    `Displaying Q2 achievements — ${rows.length} ${U} from ${distinct(rows,'partner')} partners, `+
     (F.outcome?`across ${distinct(rows,'outcome')} outcome areas and `:`covering `)+
     `${distinctArr(rows,'sectors')} sectors in ${raionCount} raions `+
     `(${rows.filter(r=>r.countrywide).length} country-wide)`+
-    (achTotal!=null?`, total achievement ${achTotal.toLocaleString()}`:``)+
     `. Click a sector icon, a chart bar, a raion, or use the filters to drill down.`;
 
   hbar('chartOrg', countBy(rows,'partner').slice(0,7), 'partner');
@@ -568,7 +556,7 @@ function buildTableCols(){
   if(F.outcome) cols.push(["outcome","Outcome area"]);
   cols.push(["activity","Activity"]);
   if(F.indicator) cols.push(["indicator","Indicator"]);
-  if(F.achievement) cols.push(["achievement","Achievement"]);
+  if(F.achievement) cols.push(["achievement","Total achievement"],["refugees","Refugees"],["host","Host community"]);
   cols.push(["status","Status"],["startDate","Start"],["endDate","End"]);
   cols.push(F.admin1?["admin1","Admin 1"]:["scope","Geographical scope"]);
   tableCols=cols;
@@ -581,15 +569,16 @@ function renderTable(rows){
   thead.querySelectorAll('th').forEach(th=>th.onclick=()=>{
     const c=th.dataset.c; sortState.dir=(sortState.col===c)?-sortState.dir:1; sortState.col=c; renderTable(filtered());
   });
+  const NUMCOLS=new Set(['achievement','refugees','host']);
   let r=rows.slice();
   if(sortState.col) r.sort((a,b)=>{
-    if(sortState.col==='achievement') return (numOf(a.achievement)-numOf(b.achievement))*sortState.dir;
+    if(NUMCOLS.has(sortState.col)) return (numOf(a[sortState.col])-numOf(b[sortState.col]))*sortState.dir;
     return String(a[sortState.col]).localeCompare(String(b[sortState.col]))*sortState.dir;
   });
   tbody.innerHTML=r.slice(0,500).map(row=>'<tr>'+tableCols.map(c=>{
     let v=row[c[0]];
-    if(c[0]==='achievement') v=numOf(v).toLocaleString();
-    return `<td${c[0]==='achievement'?' style="text-align:right;font-variant-numeric:tabular-nums"':''}>${escapeHtml(v)}</td>`;
+    if(NUMCOLS.has(c[0])) v = (v===""||v===undefined) ? "" : numOf(v).toLocaleString();
+    return `<td${NUMCOLS.has(c[0])?' style="text-align:right;font-variant-numeric:tabular-nums"':''}>${escapeHtml(v)}</td>`;
   }).join('')+'</tr>').join('');
   document.getElementById('tableCount').textContent=`${rows.length} rows`+(rows.length>500?' (showing first 500)':'');
 }
