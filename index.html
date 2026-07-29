@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Refugee Response 2026 — Partners' Achievements (Moldova)</title>
+<title>Moldova: Refugee Response 2026 — Partners' Achievements</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -108,9 +108,6 @@ tbody tr:nth-child(even){background:#f7fafc}
 
   <div class="srcbar">
     <button class="btn solid" onclick="boot()">Refresh data</button>
-    <button class="btn" onclick="document.getElementById('fileinp').click()">Load Excel / CSV / JSON…</button>
-    <input id="fileinp" type="file" accept=".xlsx,.xls,.csv,.json" style="display:none" onchange="onFile(event)">
-    <button class="btn ghost" onclick="loadSample()">Sample data</button>
     <span class="srcstat" id="srcstat">No data loaded.</span>
   </div>
 
@@ -187,11 +184,9 @@ tbody tr:nth-child(even){background:#f7fafc}
    ============================================================ */
 const CONFIG = {
   activityinfo:{
-    formId:"ci32x49mn2y89yy29",
-    // NOTE: embedding a token client-side EXPOSES it to anyone who opens
-    // this file. Prefer the fetch_activityinfo.py script for production.
-    token:"ed7dcac906a5a7a2bfa739f7a2a771ab",
-    url:"https://www.activityinfo.org/resources/query/v43/form/ci32x49mn2y89yy29"
+    formId:"",
+    token:"",
+    url:""
   },
   // logical field  ->  list of possible source column names (case-insensitive).
   // The first header found in your data wins. Add your real column names here.
