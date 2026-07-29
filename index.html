@@ -61,7 +61,9 @@ a{color:var(--unhcr)}
 
 /* chart blocks */
 .cbox{position:relative;width:100%}
-.cbox.h180{height:180px}.cbox.h150{height:150px}.cbox.h130{height:130px}.cbox.h200{height:200px}
+.cbox.h180{height:180px}.cbox.h150{height:150px}.cbox.h130{height:130px}.cbox.h200{height:200px}.cbox.h240{height:240px}
+.scrolly{overflow-y:auto;overflow-x:hidden}
+.scrolly .cinner{position:relative;width:100%}
 .mapwrap{position:relative;flex:1;min-height:260px;border:1px solid var(--line);border-radius:5px;overflow:hidden}
 #map{position:absolute;inset:0}
 .cwide{display:flex;justify-content:center;margin-top:8px}
@@ -138,7 +140,7 @@ tbody tr:nth-child(even){background:#f7fafc}
       <div class="kpi"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
         <div><div class="n" id="kpiPartners">–</div><div class="l">Partners</div></div></div>
       <div class="sub" id="subOrg"># of projects per organization</div>
-      <div class="cbox h180"><canvas id="chartOrg"></canvas></div>
+      <div class="cbox h180 scrolly"><div class="cinner" id="innerOrg"><canvas id="chartOrg"></canvas></div></div>
       <div class="sub" id="subAgency"># of projects by mandating agency</div>
       <div class="cbox h150"><canvas id="chartAgency"></canvas></div>
       <div class="sub" id="subStatus"># of projects by status</div>
@@ -151,7 +153,7 @@ tbody tr:nth-child(even){background:#f7fafc}
       <div class="kpi"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7.5L4.21 6 12 4.16 19.79 6 12 9.5zM2 17l10 5 10-5-2.2-1.1L12 19.5 4.2 15.9 2 17zm0-5l10 5 10-5-2.2-1.1L12 14.5 4.2 10.9 2 12z"/></svg>
         <div><div class="n" id="kpiOutcomes">–</div><div class="l" id="kpiOutcomesLabel">Sectors</div></div></div>
       <div class="sub" id="subOutcome"># of projects by sector</div>
-      <div class="cbox h200"><canvas id="chartOutcome"></canvas></div>
+      <div class="cbox h240"><canvas id="chartOutcome"></canvas></div>
       <div class="sub"># of partners by sector</div>
       <div class="cbox h180"><canvas id="chartSector"></canvas></div>
     </section>
@@ -313,7 +315,7 @@ const UNHCR_BLUES=["#dbe9f6","#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","
 
 const state = {
   raw:[], data:[],
-  filters:{admin1:new Set(),orgType:new Set(),agency:new Set(),sector:new Set(),isRRP:new Set()},
+  filters:{admin1:new Set(),orgType:new Set(),agency:new Set(),sector:new Set(),isRRP:new Set(),outcome:new Set()},
   charts:{}, mapLayer:null, map:null
 };
 
@@ -392,6 +394,7 @@ function passFilters(rec){
   if(f.agency.size && !f.agency.has(rec.agency)) return false;
   if(f.sector.size && !rec.sectors.some(s=>f.sector.has(s))) return false;
   if(f.isRRP.size  && !f.isRRP.has(rec.isRRP)) return false;
+  if(f.outcome && f.outcome.size && !f.outcome.has(rec.outcome)) return false;
   return true;
 }
 function filtered(){ return state.data.filter(passFilters); }
@@ -456,10 +459,10 @@ function renderAll(){
     `(${rows.filter(r=>r.countrywide).length} country-wide)`+
     `. Click a sector icon, a chart bar, a raion, or use the filters to drill down.`;
 
-  hbar('chartOrg', countBy(rows,'partner').slice(0,7), 'partner');
+  hbar('chartOrg', countBy(rows,'partner'), 'partner', {scrollInner:'innerOrg',rowH:26});
   hbar('chartAgency', countBy(rows,'agency').filter(d=>d[0]&&d[0]!=='(blank)').slice(0,7), 'agency');
   donut('chartStatus', countBy(rows,'status'));
-  if(F.outcome) hbar('chartOutcome', countBy(rows,'outcome').slice(0,7), null);
+  if(F.outcome) hbar('chartOutcome', countBy(rows,'outcome'), 'outcome', {wrap:26});
   else          vbar('chartOutcome', countByArr(rows,'sectors'), 'sector');
   vbar('chartSector', partnersByArr(rows,'sectors'), 'sector');
 
@@ -480,19 +483,32 @@ function baseBar(id,horizontal){
   const ctx=document.getElementById(id).getContext('2d');
   return {ctx,horizontal};
 }
-function hbar(id,data,filterDim){
+function wrapLabel(l,width){
+  const words=String(l).split(' '); const lines=[]; let cur='';
+  words.forEach(w=>{ if((cur+' '+w).trim().length>width){ if(cur)lines.push(cur); cur=w; } else cur=(cur+' '+w).trim(); });
+  if(cur)lines.push(cur);
+  return lines.slice(0,3);
+}
+function hbar(id,data,filterDim,opts){
+  opts=opts||{};
+  if(opts.scrollInner){  // size inner container so every row is visible via scrolling
+    const inner=document.getElementById(opts.scrollInner);
+    if(inner) inner.style.height=Math.max(1,data.length)*(opts.rowH||26)+'px';
+  }
   const {ctx}=baseBar(id,true);
   state.charts[id]=new Chart(ctx,{type:'bar',data:{
     labels:data.map(d=>d[0]),
     datasets:[{data:data.map(d=>d[1]),backgroundColor:'#2f7fc1',borderRadius:2,barThickness:14}]
   },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{enabled:true},
-      datalabels:false},
+    plugins:{legend:{display:false},tooltip:{enabled:true,position:'nearest'}},
     onClick:(e,els)=>{ if(filterDim&&els.length) toggleFilter(filterDim,data[els[0].index][0]); },
     scales:{x:{display:false,grid:{display:false}},
-      y:{ticks:{font:{size:10},callback:function(v){const l=this.getLabelForValue(v);return l.length>22?l.slice(0,21)+'…':l;}},grid:{display:false}}}
+      y:{ticks:{font:{size:10},autoSkip:false,callback:function(v){
+          const l=this.getLabelForValue(v);
+          if(opts.wrap) return wrapLabel(l,opts.wrap);
+          return l.length>22?l.slice(0,21)+'…':l;
+        }},grid:{display:false}}}
   }});
-  drawValueLabels(id,data,true);
 }
 function vbar(id,data,filterDim){
   const {ctx}=baseBar(id,false);
@@ -506,7 +522,6 @@ function vbar(id,data,filterDim){
       x:{ticks:{font:{size:9},maxRotation:40,minRotation:40,callback:function(v){const l=this.getLabelForValue(v);return l.length>12?l.slice(0,11)+'…':l;}},grid:{display:false}}}
   }});
 }
-function drawValueLabels(){/* Chart.js datalabels plugin not bundled; values shown via tooltip */}
 function donut(id,data){
   if(state.charts[id]) state.charts[id].destroy();
   const ctx=document.getElementById(id).getContext('2d');
