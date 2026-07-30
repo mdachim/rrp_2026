@@ -52,8 +52,9 @@ a{color:var(--unhcr)}
 .panel{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px;display:flex;flex-direction:column;min-width:0}
 .panel>h2{margin:0 0 8px;font-size:15px;color:var(--unhcr-d);border-bottom:2px solid var(--unhcr);padding-bottom:5px;letter-spacing:.3px}
 .sub{font-size:12px;font-weight:700;color:var(--ink);margin:10px 0 5px}
-.kpi{display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.kpi .n{font-size:40px;font-weight:800;color:var(--unhcr);line-height:1}
+.kpi{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.kpi .txt{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.kpi .n{font-size:34px;font-weight:800;color:var(--unhcr);line-height:1}
 .kpi .l{font-size:15px;color:var(--ink);font-weight:600}
 .kpi .ic{width:34px;height:34px;color:var(--unhcr)}
 .otext{font-size:12px;color:#3d4b59;line-height:1.5}
@@ -63,8 +64,9 @@ a{color:var(--unhcr)}
 .cbox.h180{height:180px}.cbox.h150{height:150px}.cbox.h130{height:130px}.cbox.h200{height:200px}.cbox.h240{height:240px}
 .scrolly{overflow-y:auto;overflow-x:hidden}
 .scrolly .cinner{position:relative;width:100%}
-.mapwrap{position:relative;flex:1;min-height:260px;border:1px solid var(--line);border-radius:5px;overflow:hidden}
-#map{position:absolute;inset:0}
+.mapwrap{position:relative;flex:1;min-height:260px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:#f7f7f7}
+#map{position:absolute;inset:0;background:#f7f7f7}
+.leaflet-container{background:#f7f7f7}
 .cwide{display:flex;justify-content:center;margin-top:8px}
 .cwcard{border:1px solid var(--line);border-radius:6px;padding:8px 16px;text-align:center}
 .cwcard .l{font-size:11px;color:var(--muted);font-weight:600}
@@ -155,7 +157,7 @@ body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
     <section class="panel">
       <h2>WHO</h2>
       <div class="kpi"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-        <div><div class="n" id="kpiPartners">–</div><div class="l">Partners</div></div></div>
+        <div class="txt"><div class="n" id="kpiPartners">–</div><div class="l">Partners</div></div></div>
       <div class="sub" id="subOrg"># of projects per organization</div>
       <div class="cbox h180 scrolly"><div class="cinner" id="innerOrg"><canvas id="chartOrg"></canvas></div></div>
       <div class="sub" id="subAgency"># of projects by mandating agency</div>
@@ -168,7 +170,7 @@ body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
     <section class="panel">
       <h2>WHAT</h2>
       <div class="kpi"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7.5L4.21 6 12 4.16 19.79 6 12 9.5zM2 17l10 5 10-5-2.2-1.1L12 19.5 4.2 15.9 2 17zm0-5l10 5 10-5-2.2-1.1L12 14.5 4.2 10.9 2 12z"/></svg>
-        <div><div class="n" id="kpiOutcomes">–</div><div class="l" id="kpiOutcomesLabel">Sectors</div></div></div>
+        <div class="txt"><div class="n" id="kpiOutcomes">–</div><div class="l" id="kpiOutcomesLabel">Sectors</div></div></div>
       <div class="sub" id="subOutcome"># of projects by sector</div>
       <div class="cbox h240"><canvas id="chartOutcome"></canvas></div>
       <div class="sub"># of partners by sector</div>
@@ -179,7 +181,7 @@ body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
     <section class="panel">
       <h2>WHERE</h2>
       <div class="kpi"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
-        <div><div class="n" id="kpiRaions">–</div><div class="l">Raions</div></div></div>
+        <div class="txt"><div class="n" id="kpiRaions">–</div><div class="l">Raions</div></div></div>
       <div class="mapwrap"><div id="map"></div></div>
       <div class="legend"><span>fewer</span><i style="background:#dbe9f6"></i><i style="background:#9ecae1"></i><i style="background:#4292c6"></i><i style="background:#08519c"></i><span>more activities</span></div>
       <div class="cwide"><div class="cwcard"><div class="l" id="cwLabel"># of country-wide projects</div><div class="n" id="kpiCountrywide">–</div></div></div>
