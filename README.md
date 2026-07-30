@@ -55,9 +55,16 @@ exports; the data preparation is done offline.
 
 | File | Purpose |
 |---|---|
-| `index.html` | The dashboard — a single self-contained page |
-| `data.json` | Activity-level dataset displayed by the dashboard |
+| `index.html` | The dashboard itself — layout, visuals and logic |
+| `data.json` | Activity-level dataset |
+| `indicator_config.json` | Indicator reference table: outcome area, sector, activity, unit and the aggregation methodology applied to each indicator |
+| `partner_types.json` | Partner reference table: organization type (UN agency, international NGO, national NGO, etc.) |
 | `pbi blue.png` | Logo shown in the dashboard header |
+| `icons/` | Sector icons used by the sector navigation panel |
+
+The dashboard loads the dataset and both reference tables at run time, so data
+refreshes and reference updates are made by replacing the relevant JSON file —
+`index.html` itself does not change.
 
 ## Technology
 
