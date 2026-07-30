@@ -184,7 +184,7 @@ body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
       <div class="kpi"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
         <div class="txt"><div class="n" id="kpiRaions">–</div><div class="l">Raions</div></div></div>
       <div class="mapwrap"><div id="map"></div></div>
-      <div class="legend"><span>fewer</span><i style="background:#dbe9f6"></i><i style="background:#9ecae1"></i><i style="background:#4292c6"></i><i style="background:#08519c"></i><span>more activities</span></div>
+      <div class="legend"><span>lower</span><i style="background:#dbe9f6"></i><i style="background:#9ecae1"></i><i style="background:#4292c6"></i><i style="background:#08519c"></i><span>higher people coverage</span></div>
       <div class="cwide"><div class="cwcard"><div class="l" id="cwLabel"># of country-wide projects</div><div class="n" id="kpiCountrywide">–</div></div></div>
     </section>
 
@@ -588,18 +588,33 @@ function initMap(){
 }
 function renderMap(rows){
   if(!state.map) initMap();
-  const counts=new Map();
-  rows.forEach(r=>r.raionKeys.forEach(k=>counts.set(k,(counts.get(k)||0)+1)));
-  const max=Math.max(1,...counts.values());
+  const isPeople=r=>{ const c=INDICATOR_CONFIG[norm(r.indicator)]; if(!c) return false;
+    if(c.peopleCoverage===false) return false;                 // e.g. information-campaign indicators
+    const u=norm(c.unit); return u==='individuals'||u==='children'; };
+  const cov=new Map();          // raion -> highest people-coverage (grand total) reported there
+  const partners=new Map();     // raion -> set of partners
+  const inds=new Map();         // raion -> set of distinct indicators (= activities)
+  rows.forEach(r=>r.raionKeys.forEach(k=>{
+    if(!partners.has(k)){ partners.set(k,new Set()); inds.set(k,new Set()); }
+    if(r.partner)  partners.get(k).add(r.partner);
+    if(r.indicator) inds.get(k).add(norm(r.indicator));
+    if(isPeople(r)) cov.set(k, Math.max(cov.get(k)||0, numOf(r.grand)));
+  }));
+  const max=Math.max(1,...cov.values());
   const color=v=>{ if(!v) return '#eef3f7'; const t=v/max; const i=Math.min(UNHCR_BLUES.length-1,Math.floor(t*UNHCR_BLUES.length)); return UNHCR_BLUES[i]; };
   if(state.mapLayer) state.mapLayer.remove();
   state.mapLayer=L.geoJSON(MOLDOVA_GEOJSON,{
-    style:f=>({color:'#fff',weight:1,fillOpacity:.9,fillColor:color(counts.get(f.properties.key)||0)}),
+    style:f=>({color:'#fff',weight:1,fillOpacity:.9,fillColor:color(cov.get(f.properties.key)||0)}),
     onEachFeature:(f,layer)=>{
-      const c=counts.get(f.properties.key)||0;
+      const k=f.properties.key;
+      const c=cov.get(k)||0;
+      const np=(partners.get(k)||new Set()).size;
+      const na=(inds.get(k)||new Set()).size;
       const active=state.filters.admin1.has(f.properties.name);
       if(active) layer.setStyle({weight:2.5,color:'#00344f'});
-      layer.bindTooltip(`${f.properties.name}: ${c} project${c===1?'':'s'}`,{className:'rt',sticky:true});
+      layer.bindTooltip(
+        `<b>${f.properties.name}</b><br>People covered: ${c.toLocaleString()}`+
+        `<br>Partners: ${np}<br>Activities: ${na}`,{className:'rt',sticky:true});
       layer.on('click',()=>toggleFilter('admin1',f.properties.name));
       layer.on('mouseover',()=>layer.setStyle({weight:2.2}));
       layer.on('mouseout',()=>{ if(!state.filters.admin1.has(f.properties.name)) state.mapLayer.resetStyle(layer); });
