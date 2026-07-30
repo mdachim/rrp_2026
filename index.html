@@ -74,8 +74,9 @@ a{color:var(--unhcr)}
 
 /* chiclet slicer */
 .chiclets{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:6px}
-.chiclet{border:1px solid var(--line);border-radius:6px;background:#fff;padding:7px 4px 5px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:.12s}
-.chiclet img{width:30px;height:30px;object-fit:contain}
+.chiclet{border:1px solid var(--line);border-radius:6px;background:#fff;padding:6px 4px;height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:.12s}
+.chiclet .ico{height:30px;display:flex;align-items:center;justify-content:center}
+.chiclet img{height:30px;width:auto;max-width:100%;object-fit:contain;display:block}
 .chiclet span{font-size:9px;line-height:1.1;text-align:center;color:var(--muted)}
 .chiclet:hover{border-color:var(--unhcr-l)}
 .chiclet.on{border-color:var(--unhcr);background:#e8f2fb;box-shadow:inset 0 0 0 1px var(--unhcr)}
@@ -786,7 +787,7 @@ function buildChiclets(){
   const wrap=document.getElementById('chiclets');
   wrap.innerHTML=list.map(s=>{
     const icon=iconForSector(s);
-    return `<div class="chiclet" data-sector="${escapeHtml(s)}"><img src="${icon}" alt="" onerror="this.style.visibility='hidden'"><span>${escapeHtml(s)}</span></div>`;
+    return `<div class="chiclet" data-sector="${escapeHtml(s)}"><span class="ico"><img src="${icon}" alt="" onerror="this.style.visibility='hidden'"></span><span>${escapeHtml(s)}</span></div>`;
   }).join('');
   wrap.querySelectorAll('.chiclet').forEach(c=>c.onclick=()=>toggleFilter('sector',c.dataset.sector));
 }
