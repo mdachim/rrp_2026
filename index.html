@@ -584,7 +584,8 @@ function donut(id,data){
 
 /* ---------- map ---------- */
 function initMap(){
-  state.map=L.map('map',{zoomControl:true,attributionControl:false,scrollWheelZoom:false}).setView([47.05,28.5],7);
+  state.map=L.map('map',{zoomControl:false,attributionControl:false,scrollWheelZoom:false}).setView([47.05,28.5],7);
+  L.control.zoom({position:'topright'}).addTo(state.map);
 }
 function renderMap(rows){
   if(!state.map) initMap();
