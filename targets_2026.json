@@ -1,0 +1,2006 @@
+{
+ "meta": {
+  "generated": "2026-08-04",
+  "sources": [
+   "061aa1e6-2026_full_view_extr.xlsx",
+   "c0285fca-Indicator_calculation_pbi_26.xlsx"
+  ],
+  "indicators": 60,
+  "submissions": 205,
+  "note": "target = partner targets aggregated per the indicator's methodology (Sum adds partners, Max takes the highest)"
+ },
+ "indicators": [
+  {
+   "indicator": "# of Civil Society Organizations (CSOs) and Refugee-Led Organizations (RLOs) capacitated to enhance service delivery",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Promote localization and community-driven solutions",
+   "method": "Sum",
+   "target": 234,
+   "budget": 960000,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "Moldova Red Cross Society",
+     "target": 210,
+     "budget": 580000,
+     "submissions": 1
+    },
+    {
+     "partner": "Female Support Force",
+     "target": 20,
+     "budget": 50000,
+     "submissions": 1
+    },
+    {
+     "partner": "Plan International",
+     "target": 4,
+     "budget": 330000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of PSEA network members, partner personnel and staff members of stakeholders involved in the refugee response trained on SEA risk mitigation, prevention and response",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Provide access to essential services and infrastructure, including housing, food, water, and sanitation, for refugees and vulnerable host communities",
+   "method": "Max",
+   "target": 300,
+   "budget": 516710,
+   "partners": 3,
+   "submissions": 5,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 300,
+     "budget": 45000,
+     "submissions": 3
+    },
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 100,
+     "budget": 416800,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 50,
+     "budget": 54910,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of assessments carried out",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Provide access to essential services and infrastructure, including housing, food, water, and sanitation, for refugees and vulnerable host communities",
+   "method": "Sum",
+   "target": 4,
+   "budget": 450000,
+   "partners": 2,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "IMPACT Initiatives",
+     "target": 2,
+     "budget": 350000,
+     "submissions": 2
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 2,
+     "budget": 100000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of collective accommodation structures rehabilitated, including specialized institutions and social housing",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Strengthen refugee inclusion into the national social protection system",
+   "method": "Sum",
+   "target": 23,
+   "budget": 5366423.355,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 19,
+     "budget": 4866423.355,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 4,
+     "budget": 500000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of eligible individuals enrolled in national social assistance schemes",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Strengthen refugee inclusion into the national social protection system",
+   "method": "Max",
+   "target": 8000,
+   "budget": 890000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 8000,
+     "budget": 690000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 900,
+     "budget": 200000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of government staff trained on social assistance mechanisms for refugees",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Strengthen refugee inclusion into the national social protection system",
+   "method": "Sum",
+   "target": 50,
+   "budget": 45000,
+   "partners": 1,
+   "submissions": 1,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 50,
+     "budget": 45000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals receiving food assistance (in-kind)",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Provide access to essential services and infrastructure, including housing, food, water, and sanitation, for refugees and vulnerable host communities",
+   "method": "Sum",
+   "target": 1090,
+   "budget": 4831800,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "World Food Programme",
+     "target": 1000,
+     "budget": 4830000,
+     "submissions": 1
+    },
+    {
+     "partner": "Church World Service",
+     "target": 90,
+     "budget": 1800,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals receiving non-food items",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Provide access to essential services and infrastructure, including housing, food, water, and sanitation, for refugees and vulnerable host communities",
+   "method": "Max",
+   "target": 9100,
+   "budget": 3115079.5149999997,
+   "partners": 4,
+   "submissions": 4,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 9100,
+     "budget": 220607,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 3500,
+     "budget": 2862672.5149999997,
+     "submissions": 1
+    },
+    {
+     "partner": "Charity Centre for Refugees",
+     "target": 3000,
+     "budget": 30000,
+     "submissions": 1
+    },
+    {
+     "partner": "Church World Service",
+     "target": 90,
+     "budget": 1800,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals supported through housing repairs or the rehabilitation of affordable housing units",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Provide access to essential services and infrastructure, including housing, food, water, and sanitation, for refugees and vulnerable host communities",
+   "method": "Sum",
+   "target": 670,
+   "budget": 2257669,
+   "partners": 4,
+   "submissions": 4,
+   "byPartner": [
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 300,
+     "budget": 1288033,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 184,
+     "budget": 420000,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 144,
+     "budget": 438136,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 42,
+     "budget": 111500,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals supported with access to safe and appropriate sanitation facilities",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Provide access to essential services and infrastructure, including housing, food, water, and sanitation, for refugees and vulnerable host communities",
+   "method": "Max",
+   "target": 6300,
+   "budget": 1050000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 6300,
+     "budget": 300000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 5000,
+     "budget": 750000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals supported with rental subsidies or financial assistance for housing",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Provide access to essential services and infrastructure, including housing, food, water, and sanitation, for refugees and vulnerable host communities",
+   "method": "Sum",
+   "target": 9842,
+   "budget": 4763710,
+   "partners": 5,
+   "submissions": 5,
+   "byPartner": [
+    {
+     "partner": "World Food Programme",
+     "target": 7500,
+     "budget": 2070000,
+     "submissions": 1
+    },
+    {
+     "partner": "Association for Aid and Relief Japan",
+     "target": 1200,
+     "budget": 500000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 690,
+     "budget": 924210,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 252,
+     "budget": 669500,
+     "submissions": 1
+    },
+    {
+     "partner": "Acted",
+     "target": 200,
+     "budget": 600000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of infrastructure projects implemented in support of peaceful coexistence",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Promote localization and community-driven solutions",
+   "method": "Sum",
+   "target": 7,
+   "budget": 812400,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 5,
+     "budget": 750000,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 2,
+     "budget": 62400,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of refugee-hosting municipalities developing local action plans for refugee inclusion",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Promote localization and community-driven solutions",
+   "method": "Max",
+   "target": 10,
+   "budget": 152350,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "People In Need",
+     "target": 10,
+     "budget": 2350,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 5,
+     "budget": 150000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of vulnerable individuals supported with MPCA or tailored cash assistance addressing specific protection needs",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Deliver targeted Multi-Purpose Cash Assistance to vulnerable refugees to meet their essential needs and reduce protection risks",
+   "method": "Max",
+   "target": 22350,
+   "budget": 43025117.515,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 22350,
+     "budget": 40198117.515,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 1500,
+     "budget": 2727000,
+     "submissions": 1
+    },
+    {
+     "partner": "Charity Centre for Refugees",
+     "target": 340,
+     "budget": 100000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of vulnerable individuals supported with cash assistance for winter related needs",
+   "sector": "Basic Needs",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Deliver targeted Multi-Purpose Cash Assistance to vulnerable refugees to meet their essential needs and reduce protection risks",
+   "method": "Max",
+   "target": 4800,
+   "budget": 1782983,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 4800,
+     "budget": 1092983,
+     "submissions": 1
+    },
+    {
+     "partner": "Moldova Red Cross Society",
+     "target": 4000,
+     "budget": 360000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 1840,
+     "budget": 330000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of UASC identified and who access assistance",
+   "sector": "Child Protection",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Provide child protection services for boys and girls at risk, including child victims of violence and gender-based violence, as well as UASC",
+   "method": "Sum",
+   "target": 50,
+   "budget": 150000,
+   "partners": 1,
+   "submissions": 1,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 50,
+     "budget": 150000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of assessments conducted",
+   "sector": "Child Protection",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Provide child protection services for boys and girls at risk, including child victims of violence and gender-based violence, as well as UASC",
+   "method": "Sum",
+   "target": 150,
+   "budget": 200000,
+   "partners": 1,
+   "submissions": 1,
+   "byPartner": [
+    {
+     "partner": "People In Need",
+     "target": 150,
+     "budget": 200000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of children and caregivers informed of child protection risks and/or parents and caregivers with improved capacities to protect children",
+   "sector": "Child Protection",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Conduct child protection awareness raising and parenting support to prevent child abuse, neglect, and violence",
+   "method": "Max",
+   "target": 22000,
+   "budget": 625000,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 22000,
+     "budget": 400000,
+     "submissions": 1
+    },
+    {
+     "partner": "Centrul Național de Prevenire a Abuzului față de Copii",
+     "target": 1500,
+     "budget": 185000,
+     "submissions": 1
+    },
+    {
+     "partner": "People In Need",
+     "target": 100,
+     "budget": 40000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of children and caregivers who access MHPSS and recreational activities",
+   "sector": "Child Protection",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Provide MHPSS and recreational activities",
+   "method": "Max",
+   "target": 15000,
+   "budget": 1406781,
+   "partners": 11,
+   "submissions": 11,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 15000,
+     "budget": 500000,
+     "submissions": 1
+    },
+    {
+     "partner": "Moldova Red Cross Society",
+     "target": 6000,
+     "budget": 400000,
+     "submissions": 1
+    },
+    {
+     "partner": "Terre des hommes Moldova",
+     "target": 2500,
+     "budget": 40000,
+     "submissions": 1
+    },
+    {
+     "partner": "Charity Centre for Refugees",
+     "target": 1200,
+     "budget": 20000,
+     "submissions": 1
+    },
+    {
+     "partner": "People In Need",
+     "target": 1000,
+     "budget": 150000,
+     "submissions": 1
+    },
+    {
+     "partner": "Female Support Force",
+     "target": 500,
+     "budget": 50000,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 350,
+     "budget": 15648,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 240,
+     "budget": 49484,
+     "submissions": 1
+    },
+    {
+     "partner": "Fundatia \"Don Bosco\"",
+     "target": 200,
+     "budget": 67000,
+     "submissions": 1
+    },
+    {
+     "partner": "KeyStone Moldova",
+     "target": 192,
+     "budget": 108949,
+     "submissions": 1
+    },
+    {
+     "partner": "Alliance of NGOs Active in the field of Child and Family Social Protection",
+     "target": 10,
+     "budget": 5700,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of children and caregivers who are referred and access child protection and social services",
+   "sector": "Child Protection",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Provide child protection services for boys and girls at risk, including child victims of violence and gender-based violence, as well as UASC",
+   "method": "Max",
+   "target": 70000,
+   "budget": 1050000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 70000,
+     "budget": 850000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 19978,
+     "budget": 200000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of professionals trained, supervised and technically supported on child protection and/or children’s rights and/or in social services",
+   "sector": "Child Protection",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Strengthen the capacity of the national child protection system to ensure better integration of refugee children and caregivers and continuous access to services for vulnerable Moldovan children and their caregivers, including children with specific needs.",
+   "method": "Sum",
+   "target": 5064,
+   "budget": 449366,
+   "partners": 6,
+   "submissions": 6,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 4000,
+     "budget": 255000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 600,
+     "budget": 107825,
+     "submissions": 1
+    },
+    {
+     "partner": "Terre des hommes Moldova",
+     "target": 264,
+     "budget": 20000,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 100,
+     "budget": 65000,
+     "submissions": 1
+    },
+    {
+     "partner": "People In Need",
+     "target": 50,
+     "budget": 0,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 50,
+     "budget": 1541,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of caregivers reached in informative sessions regarding the right to education and the process of enrollment of children in schools and preschools",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Support the continuity of formal education for refugee and vulnerable Moldovan children, adolescents, and youth",
+   "method": "Max",
+   "target": 14125,
+   "budget": 111800,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 14125,
+     "budget": 66570,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 450,
+     "budget": 5230,
+     "submissions": 1
+    },
+    {
+     "partner": "Female Support Force",
+     "target": 400,
+     "budget": 40000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of children and adolescents and their caregivers benefiting from school based MHPSS interventions",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Provision of non-formal education for refugee and vulnerable Moldovan children and adolescents",
+   "method": "Max",
+   "target": 3380,
+   "budget": 162883,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 3380,
+     "budget": 111680,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 1300,
+     "budget": 25740,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 300,
+     "budget": 25463,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of children and adolescents receiving Educational Kits (including inclusive learning materials) adapted to different age groups",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Support the continuity of formal education for refugee and vulnerable Moldovan children, adolescents, and youth",
+   "method": "Max",
+   "target": 14190,
+   "budget": 609396,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 14190,
+     "budget": 543079,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 600,
+     "budget": 51797,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 200,
+     "budget": 14520,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of children and adolescents supported to continue their learning online using Ukrainian (or other) learning platforms inside school-settings",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Support the continuity of formal education for refugee and vulnerable Moldovan children, adolescents, and youth",
+   "method": "Max",
+   "target": 720,
+   "budget": 110372,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 720,
+     "budget": 55708,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 250,
+     "budget": 54664,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of refugee and vulnerable Moldovan children and adolescents (including Roma children and children with disabilities) benefiting from adapted inclusive education services,  through the provision of assistive devices, appropriate transportation, and specialized and adapted learning programs.",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Support the continuity of formal education for refugee and vulnerable Moldovan children, adolescents, and youth",
+   "method": "Max",
+   "target": 26206,
+   "budget": 930000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 26206,
+     "budget": 900000,
+     "submissions": 1
+    },
+    {
+     "partner": "AO Izbiște - sat natal",
+     "target": 40,
+     "budget": 30000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of refugee and vulnerable Moldovan children and adolescents benefiting from remedial, catch-up and language classes, skills development or any other form of non-formal education",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Provision of non-formal education for refugee and vulnerable Moldovan children and adolescents",
+   "method": "Max",
+   "target": 1000,
+   "budget": 591086,
+   "partners": 6,
+   "submissions": 6,
+   "byPartner": [
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 1000,
+     "budget": 198555,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 850,
+     "budget": 175257,
+     "submissions": 1
+    },
+    {
+     "partner": "Moldova Red Cross Society",
+     "target": 420,
+     "budget": 100000,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 300,
+     "budget": 49692,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 200,
+     "budget": 47282,
+     "submissions": 1
+    },
+    {
+     "partner": "Alliance of NGOs Active in the field of Child and Family Social Protection",
+     "target": 45,
+     "budget": 20300,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of refugee and vulnerable Moldovan children and adolescents benefiting from summer camps, recreational and social cohesion activities organized in schools",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Provision of non-formal education for refugee and vulnerable Moldovan children and adolescents",
+   "method": "Max",
+   "target": 26206,
+   "budget": 769037,
+   "partners": 5,
+   "submissions": 5,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 26206,
+     "budget": 330527,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 960,
+     "budget": 43253,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 850,
+     "budget": 175257,
+     "submissions": 1
+    },
+    {
+     "partner": "Plan International",
+     "target": 530,
+     "budget": 150000,
+     "submissions": 1
+    },
+    {
+     "partner": "Humanitarian Aid Center of the Jewish Community of Moldova",
+     "target": 400,
+     "budget": 70000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of refugee children, adolescents, and youth (including Roma refugee children) supported to officially enroll in Moldovan educational institutions",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Support the continuity of formal education for refugee and vulnerable Moldovan children, adolescents, and youth",
+   "method": "Max",
+   "target": 6356,
+   "budget": 49436,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 6356,
+     "budget": 34436,
+     "submissions": 1
+    },
+    {
+     "partner": "Charity Centre for Refugees",
+     "target": 1000,
+     "budget": 15000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of schools and preschools supported with rehabilitation",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Support in enhancing the overall school environment to be supportive, accessible, and inclusive for all children",
+   "method": "Sum",
+   "target": 17,
+   "budget": 220000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 16,
+     "budget": 20000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Development Programme",
+     "target": 1,
+     "budget": 200000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of schools and preschools supported with school furniture and ICT equipment",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Support in enhancing the overall school environment to be supportive, accessible, and inclusive for all children",
+   "method": "Sum",
+   "target": 8,
+   "budget": 41957,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 7,
+     "budget": 11957,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Development Programme",
+     "target": 1,
+     "budget": 30000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of teachers, psychologists, school staff and caregivers benefiting from inclusive education, innovative pedagogies, MHPSS, learning support, child social and emotional well-being and other capacity building trainings",
+   "sector": "Education",
+   "outcome": "Equitable Access to Quality and Inclusive Education",
+   "activity": "Strengthen the capacity of educational staff and caregivers on inclusive education, innovative pedagogies, MHPSS, learning support and child social and emotional well-being",
+   "method": "Sum",
+   "target": 4630,
+   "budget": 1122433,
+   "partners": 7,
+   "submissions": 7,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 3420,
+     "budget": 500000,
+     "submissions": 1
+    },
+    {
+     "partner": "Alliance of NGOs Active in the field of Child and Family Social Protection",
+     "target": 400,
+     "budget": 65140,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 400,
+     "budget": 200000,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 200,
+     "budget": 129850,
+     "submissions": 1
+    },
+    {
+     "partner": "UN Human Rights Office in Moldova",
+     "target": 150,
+     "budget": 200000,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 40,
+     "budget": 4443,
+     "submissions": 1
+    },
+    {
+     "partner": "Terre des hommes Moldova",
+     "target": 20,
+     "budget": 23000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of assessments on GBV that contribute to developing national capacity conducted",
+   "sector": "GBV",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Build national and local capacity on GBV, including through targeted trainings based on thorough capacity assessments, assessments and studies on GBV, and policy and legal framework developed and improved to address GBV, ensuring a sustainable and coordinated approach",
+   "method": "Sum",
+   "target": 1,
+   "budget": 100000,
+   "partners": 1,
+   "submissions": 1,
+   "byPartner": [
+    {
+     "partner": "United Nations Population Fund",
+     "target": 1,
+     "budget": 100000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals reached with specialized GBV prevention programming",
+   "sector": "GBV",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Prevent GBV by conducting curriculum-based and structured GBV activities, as well as information sharing, contributing to long-term shifts in gender-inequitable norms and promoting a culture of respect and non-violence for women and girls, and at-risk groups",
+   "method": "Max",
+   "target": 60000,
+   "budget": 3095000,
+   "partners": 4,
+   "submissions": 4,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 60000,
+     "budget": 600000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Population Fund",
+     "target": 20500,
+     "budget": 2430000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 1333,
+     "budget": 50000,
+     "submissions": 1
+    },
+    {
+     "partner": "Charity Centre for Refugees",
+     "target": 200,
+     "budget": 15000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals reached with specialized GBV response programming",
+   "sector": "GBV",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Provide quality specialized GBV services, including GBV case management, legal aid and psychological support, in line with standards and thorough procedures, ensuring geographical coverage and coordinated and survivor-centred referral mechanisms, including for those addressing the needs of specific groups",
+   "method": "Max",
+   "target": 4000,
+   "budget": 3263837,
+   "partners": 5,
+   "submissions": 5,
+   "byPartner": [
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 4000,
+     "budget": 1393837,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Population Fund",
+     "target": 3480,
+     "budget": 1305000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 400,
+     "budget": 200000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 200,
+     "budget": 350000,
+     "submissions": 1
+    },
+    {
+     "partner": "Church World Service",
+     "target": 150,
+     "budget": 15000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of trained aid workers and government staff on GBV",
+   "sector": "GBV",
+   "outcome": "Inclusive Protection Services",
+   "activity": "Build national and local capacity on GBV, including through targeted trainings based on thorough capacity assessments, assessments and studies on GBV, and policy and legal framework developed and improved to address GBV, ensuring a sustainable and coordinated approach",
+   "method": "Sum",
+   "target": 9300,
+   "budget": 480000,
+   "partners": 1,
+   "submissions": 1,
+   "byPartner": [
+    {
+     "partner": "United Nations Population Fund",
+     "target": 9300,
+     "budget": 480000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of consultations provided for Specialized MHPSS services",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Continue reinforcing access to and provision of quality health services (including primary healthcare, emergency care, trauma care and rehabilitation, sexual and reproductive health including CMR, immunization, perinatal care, MHPSS, GBV, long-term and palliative care, rehabilitation, communicable diseases (TB, HIV, Hepatitis C, COVID-19, etc.))to refugees and vulnerable host population",
+   "method": "Sum",
+   "target": 6030,
+   "budget": 2184800,
+   "partners": 4,
+   "submissions": 4,
+   "byPartner": [
+    {
+     "partner": "Project HOPE",
+     "target": 4200,
+     "budget": 125000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 1300,
+     "budget": 1840000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 500,
+     "budget": 210000,
+     "submissions": 1
+    },
+    {
+     "partner": "Alliance of NGOs Active in the field of Child and Family Social Protection",
+     "target": 30,
+     "budget": 9800,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of developed and implemented tools for forecasting, costing, and designing benefit packages",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Strengthen national authorities’ capacities in implementation of new sustainable financing mechanism and improvement of the monitoring and evidence of service provision",
+   "method": "Sum",
+   "target": 5,
+   "budget": 540000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "World Health Organization",
+     "target": 3,
+     "budget": 450000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 2,
+     "budget": 90000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of health items procured, including vaccines, nutrition products and micronutrients",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Procurement and distribution of essential medical equipment, medicines, vaccines, diagnostics, assistive devices, and nutrition products",
+   "method": "Sum",
+   "target": 100553,
+   "budget": 1935000,
+   "partners": 4,
+   "submissions": 4,
+   "byPartner": [
+    {
+     "partner": "Project HOPE",
+     "target": 100000,
+     "budget": 175000,
+     "submissions": 1
+    },
+    {
+     "partner": "World Health Organization",
+     "target": 500,
+     "budget": 100000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Population Fund",
+     "target": 50,
+     "budget": 1310000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 3,
+     "budget": 350000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of health sector-specific studies (needs assessments, risk analyses) conducted or supported by health partners",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Conduct needs assessments, health situational, and risk analyses to understand the needs of refugees and vulnerable host population, health status, and potential risks and operational opportunities for NEXUS. Conduct operational research to assess the impact of the ongoing health sector interventions",
+   "method": "Sum",
+   "target": 21,
+   "budget": 280000,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "Project HOPE",
+     "target": 16,
+     "budget": 10000,
+     "submissions": 1
+    },
+    {
+     "partner": "World Health Organization",
+     "target": 4,
+     "budget": 240000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Population Fund",
+     "target": 1,
+     "budget": 30000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of healthcare facilities rehabilitated",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Rehabilitation of healthcare institutions to ensure safe clinical environment for delivery of quality services to refugees and vulnerable host population",
+   "method": "Sum",
+   "target": 2,
+   "budget": 300000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 1,
+     "budget": 200000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Development Programme",
+     "target": 1,
+     "budget": 100000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of healthcare workers trained to provide health services, including clinical management IPC and MHPSS to refugees and host population",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Strengthen the quality of care through capacity building and support to deliver safe and effective care",
+   "method": "Sum",
+   "target": 4550,
+   "budget": 676000,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 3000,
+     "budget": 156000,
+     "submissions": 1
+    },
+    {
+     "partner": "World Health Organization",
+     "target": 1100,
+     "budget": 300000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Population Fund",
+     "target": 450,
+     "budget": 220000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals (including non-healthcare workers) benefitting from sector related trainings and/or other capacity-building activities",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Strengthen the quality of care through capacity building and support to deliver safe and effective care",
+   "method": "Sum",
+   "target": 1380,
+   "budget": 140000,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "Project HOPE",
+     "target": 1000,
+     "budget": 50000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 200,
+     "budget": 60000,
+     "submissions": 1
+    },
+    {
+     "partner": "World Health Organization",
+     "target": 180,
+     "budget": 30000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals covered with curative and prevention services",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Continue reinforcing access to and provision of quality health services (including primary healthcare, emergency care, trauma care and rehabilitation, sexual and reproductive health including CMR, immunization, perinatal care, MHPSS, GBV, long-term and palliative care, rehabilitation, communicable diseases (TB, HIV, Hepatitis C, COVID-19, etc.))to refugees and vulnerable host population",
+   "method": "Max",
+   "target": 4000,
+   "budget": 492761,
+   "partners": 5,
+   "submissions": 5,
+   "byPartner": [
+    {
+     "partner": "United Nations Population Fund",
+     "target": 4000,
+     "budget": 100000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 2500,
+     "budget": 170000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 750,
+     "budget": 75000,
+     "submissions": 1
+    },
+    {
+     "partner": "RCTV Memoria",
+     "target": 350,
+     "budget": 60000,
+     "submissions": 1
+    },
+    {
+     "partner": "Fundația “Regina Pacis”",
+     "target": 250,
+     "budget": 87761,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals participating in MHPSS services and activities",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Continue reinforcing access to and provision of quality health services (including primary healthcare, emergency care, trauma care and rehabilitation, sexual and reproductive health including CMR, immunization, perinatal care, MHPSS, GBV, long-term and palliative care, rehabilitation, communicable diseases (TB, HIV, Hepatitis C, COVID-19, etc.))to refugees and vulnerable host population",
+   "method": "Max",
+   "target": 20000,
+   "budget": 660000,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 20000,
+     "budget": 150000,
+     "submissions": 1
+    },
+    {
+     "partner": "National Congress of Ukranians in Moldova",
+     "target": 7520,
+     "budget": 180000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 7000,
+     "budget": 330000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of policy documents developed on emergency preparedness and/or in which emergency preperedness provisions were integrated",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Support health sector emergency preparedness and risk management capacities based on an all-hazards approach, to protect populations from public health risks of both natural and manmade emergencies and meet immediate life-saving and life-supporting needs, while preventing the deterioration of the situation",
+   "method": "Sum",
+   "target": 10,
+   "budget": 258000,
+   "partners": 1,
+   "submissions": 1,
+   "byPartner": [
+    {
+     "partner": "World Health Organization",
+     "target": 10,
+     "budget": 258000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of refugees reached with information on health topics, available services, and how to access health care",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Conduct risk communication and community engagement activities for refugees and vulnerable host population",
+   "method": "Max",
+   "target": 90000,
+   "budget": 1569600,
+   "partners": 8,
+   "submissions": 8,
+   "byPartner": [
+    {
+     "partner": "World Health Organization",
+     "target": 90000,
+     "budget": 65000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 82000,
+     "budget": 500000,
+     "submissions": 1
+    },
+    {
+     "partner": "Moldova Red Cross Society",
+     "target": 40000,
+     "budget": 400000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 15000,
+     "budget": 150000,
+     "submissions": 1
+    },
+    {
+     "partner": "INTERSOS",
+     "target": 2000,
+     "budget": 25000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Population Fund",
+     "target": 1000,
+     "budget": 150000,
+     "submissions": 1
+    },
+    {
+     "partner": "Project HOPE",
+     "target": 1000,
+     "budget": 10000,
+     "submissions": 1
+    },
+    {
+     "partner": "KeyStone Moldova",
+     "target": 400,
+     "budget": 269600,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of refugees whose medical services, medicines, and medical products were covered",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Provide financial support to the National Health Insurance Company, ensuring refugees benefit from quality medical services",
+   "method": "Max",
+   "target": 12000,
+   "budget": 1727000,
+   "partners": 4,
+   "submissions": 4,
+   "byPartner": [
+    {
+     "partner": "United Nations Population Fund",
+     "target": 12000,
+     "budget": 650000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 10000,
+     "budget": 750000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 8000,
+     "budget": 300000,
+     "submissions": 1
+    },
+    {
+     "partner": "INTERSOS",
+     "target": 200,
+     "budget": 27000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of simulation exercises conducted",
+   "sector": "Health and Nutrition",
+   "outcome": "Equitable Access to Quality Healthcare",
+   "activity": "Support health sector emergency preparedness and risk management capacities based on an all-hazards approach, to protect populations from public health risks of both natural and manmade emergencies and meet immediate life-saving and life-supporting needs, while preventing the deterioration of the situation",
+   "method": "Sum",
+   "target": 10,
+   "budget": 270000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "World Health Organization",
+     "target": 6,
+     "budget": 70000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Population Fund",
+     "target": 4,
+     "budget": 200000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals placed in formal employment",
+   "sector": "Livelihoods & Socio-Economic Inclusion",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Promote access to formal employment, entrepreneurship, and financial services for refugee economic inclusion",
+   "method": "Sum",
+   "target": 70,
+   "budget": 94183,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 40,
+     "budget": 62126,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 30,
+     "budget": 32057,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals supported with access to banking and financial services",
+   "sector": "Livelihoods & Socio-Economic Inclusion",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Promote access to formal employment, entrepreneurship, and financial services for refugee economic inclusion",
+   "method": "Max",
+   "target": 650,
+   "budget": 210560,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 650,
+     "budget": 200000,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 80,
+     "budget": 10560,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals who received employment services and assistance (e.g., job matching, skills/vocational/ language training, employment-related legal advice, etc.)",
+   "sector": "Livelihoods & Socio-Economic Inclusion",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Promote access to formal employment, entrepreneurship, and financial services for refugee economic inclusion",
+   "method": "Sum",
+   "target": 7803,
+   "budget": 4653772,
+   "partners": 8,
+   "submissions": 8,
+   "byPartner": [
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 5000,
+     "budget": 3450000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 833,
+     "budget": 500000,
+     "submissions": 1
+    },
+    {
+     "partner": "Charity Centre for Refugees",
+     "target": 700,
+     "budget": 15000,
+     "submissions": 1
+    },
+    {
+     "partner": "HEKS/EPER",
+     "target": 670,
+     "budget": 400000,
+     "submissions": 1
+    },
+    {
+     "partner": "Terre des hommes Moldova",
+     "target": 320,
+     "budget": 7000,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 120,
+     "budget": 128228,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 90,
+     "budget": 97544,
+     "submissions": 1
+    },
+    {
+     "partner": "AO MIRKIRAS",
+     "target": 70,
+     "budget": 56000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals who received entrepreneurship/ self-employment training or business development support (grants or microfinance support to start or expand their own businesses)",
+   "sector": "Livelihoods & Socio-Economic Inclusion",
+   "outcome": "Inclusive Social Protection Systems, Economic Empowerment and Labor Market Integration",
+   "activity": "Promote access to formal employment, entrepreneurship, and financial services for refugee economic inclusion",
+   "method": "Sum",
+   "target": 1105,
+   "budget": 3414126.49,
+   "partners": 7,
+   "submissions": 7,
+   "byPartner": [
+    {
+     "partner": "Terre des hommes Moldova",
+     "target": 400,
+     "budget": 8000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 390,
+     "budget": 1150000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Development Programme",
+     "target": 100,
+     "budget": 800000,
+     "submissions": 1
+    },
+    {
+     "partner": "UN Women",
+     "target": 100,
+     "budget": 862144.49,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 80,
+     "budget": 467268,
+     "submissions": 1
+    },
+    {
+     "partner": "Catholic Relief Services",
+     "target": 25,
+     "budget": 121714,
+     "submissions": 1
+    },
+    {
+     "partner": "Church World Service",
+     "target": 10,
+     "budget": 5000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of Individuals receiving individual legal assistance support",
+   "sector": "Protection",
+   "outcome": "Legal Framework, Legal Status, Access to Territory, Asylum and to Justice",
+   "activity": "Provide comprehensive protection assistance and case management services to refugees, including individualized support for vulnerable cases, while conducting targeted awareness-raising campaigns on protection risks and rights",
+   "method": "Max",
+   "target": 55000,
+   "budget": 7364695,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 55000,
+     "budget": 7060839,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 3920,
+     "budget": 303856,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of community-led projects/organizations supported",
+   "sector": "Protection",
+   "outcome": "Legal Framework, Legal Status, Access to Territory, Asylum and to Justice",
+   "activity": "Promote social cohesion and foster community support between refugees and host communities through joint initiatives, with a focus on building mutual understanding and resilience",
+   "method": "Sum",
+   "target": 22,
+   "budget": 700000,
+   "partners": 2,
+   "submissions": 2,
+   "byPartner": [
+    {
+     "partner": "People In Need",
+     "target": 14,
+     "budget": 520000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Children's Fund",
+     "target": 8,
+     "budget": 180000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of government officials, NGO/CSO staff, or volunteers who have received protection-related training and/or participated in capacity-building activities",
+   "sector": "Protection",
+   "outcome": "Legal Framework, Legal Status, Access to Territory, Asylum and to Justice",
+   "activity": "Strengthen the capacity of local authorities, NGOs, and community leaders (refugee and host) through targeted training on protection principles",
+   "method": "Sum",
+   "target": 802,
+   "budget": 353000,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 512,
+     "budget": 300000,
+     "submissions": 1
+    },
+    {
+     "partner": "People In Need",
+     "target": 150,
+     "budget": 37000,
+     "submissions": 1
+    },
+    {
+     "partner": "Terre des hommes Moldova",
+     "target": 140,
+     "budget": 16000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals benefitting from social cohesion activities and community-based initiatives",
+   "sector": "Protection",
+   "outcome": "Legal Framework, Legal Status, Access to Territory, Asylum and to Justice",
+   "activity": "Promote social cohesion and foster community support between refugees and host communities through joint initiatives, with a focus on building mutual understanding and resilience",
+   "method": "Max",
+   "target": 17000,
+   "budget": 1320698,
+   "partners": 9,
+   "submissions": 9,
+   "byPartner": [
+    {
+     "partner": "United Nations High Commissioner for Refugees",
+     "target": 17000,
+     "budget": 533698,
+     "submissions": 1
+    },
+    {
+     "partner": "Laolalta",
+     "target": 5000,
+     "budget": 390000,
+     "submissions": 1
+    },
+    {
+     "partner": "International Organization for Migration",
+     "target": 2000,
+     "budget": 100000,
+     "submissions": 1
+    },
+    {
+     "partner": "United Nations Development Programme",
+     "target": 500,
+     "budget": 120000,
+     "submissions": 1
+    },
+    {
+     "partner": "Female Support Force",
+     "target": 500,
+     "budget": 50000,
+     "submissions": 1
+    },
+    {
+     "partner": "Terre des hommes Moldova",
+     "target": 290,
+     "budget": 15000,
+     "submissions": 1
+    },
+    {
+     "partner": "Church World Service",
+     "target": 270,
+     "budget": 12000,
+     "submissions": 1
+    },
+    {
+     "partner": "Humanitarian Aid Center of the Jewish Community of Moldova",
+     "target": 50,
+     "budget": 40000,
+     "submissions": 1
+    },
+    {
+     "partner": "UN Human Rights Office in Moldova",
+     "target": 25,
+     "budget": 60000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals receiving information on protection risks, services, and refugees' rights in a relevant language, through awareness-raising sessions or other means",
+   "sector": "Protection",
+   "outcome": "Legal Framework, Legal Status, Access to Territory, Asylum and to Justice",
+   "activity": "Provide comprehensive protection assistance and case management services to refugees, including individualized support for vulnerable cases, while conducting targeted awareness-raising campaigns on protection risks and rights",
+   "method": "Max",
+   "target": 8000,
+   "budget": 454335,
+   "partners": 7,
+   "submissions": 7,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 8000,
+     "budget": 200000,
+     "submissions": 1
+    },
+    {
+     "partner": "Laolalta",
+     "target": 6000,
+     "budget": 60000,
+     "submissions": 1
+    },
+    {
+     "partner": "Norwegian Refugee Council",
+     "target": 2400,
+     "budget": 74093,
+     "submissions": 1
+    },
+    {
+     "partner": "People In Need",
+     "target": 1500,
+     "budget": 23000,
+     "submissions": 1
+    },
+    {
+     "partner": "Pestalozzi Children's Foundation",
+     "target": 750,
+     "budget": 63242,
+     "submissions": 1
+    },
+    {
+     "partner": "Charity Centre for Refugees",
+     "target": 500,
+     "budget": 15000,
+     "submissions": 1
+    },
+    {
+     "partner": "Terre des hommes Moldova",
+     "target": 340,
+     "budget": 19000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of individuals with specific needs receiving targeted protection support/assistance",
+   "sector": "Protection",
+   "outcome": "Legal Framework, Legal Status, Access to Territory, Asylum and to Justice",
+   "activity": "Provide comprehensive protection assistance and case management services to refugees, including individualized support for vulnerable cases, while conducting targeted awareness-raising campaigns on protection risks and rights",
+   "method": "Sum",
+   "target": 9110,
+   "budget": 956000,
+   "partners": 3,
+   "submissions": 3,
+   "byPartner": [
+    {
+     "partner": "International Organization for Migration",
+     "target": 7090,
+     "budget": 921000,
+     "submissions": 1
+    },
+    {
+     "partner": "Charity Centre for Refugees",
+     "target": 2000,
+     "budget": 25000,
+     "submissions": 1
+    },
+    {
+     "partner": "Church World Service",
+     "target": 20,
+     "budget": 10000,
+     "submissions": 1
+    }
+   ]
+  },
+  {
+   "indicator": "# of institutions/organizations benefitting from sector-related training and/or other capacity-building activities",
+   "sector": "Protection",
+   "outcome": "Legal Framework, Legal Status, Access to Territory, Asylum and to Justice",
+   "activity": "Strengthen the capacity of local authorities, NGOs, and community leaders (refugee and host) through targeted training on protection principles",
+   "method": "Sum",
+   "target": 14,
+   "budget": 37000,
+   "partners": 1,
+   "submissions": 1,
+   "byPartner": [
+    {
+     "partner": "People In Need",
+     "target": 14,
+     "budget": 37000,
+     "submissions": 1
+    }
+   ]
+  }
+ ]
+}
