@@ -104,6 +104,38 @@ thead th{position:sticky;top:0;background:var(--unhcr);color:#fff;text-align:lef
 thead th:hover{background:var(--unhcr-d)}
 tbody td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
 tbody tr:nth-child(even){background:#f7fafc}
+/* partner activities — card view */
+.layoutsw{display:flex;margin-left:10px}
+.lsw{border:1px solid var(--line);background:#fff;color:var(--muted);font-size:11px;font-weight:600;padding:4px 9px;cursor:pointer}
+.lsw:first-child{border-radius:4px 0 0 4px}
+.lsw:last-child{border-radius:0 4px 4px 0;border-left:0}
+.lsw.on{background:#e8f2fb;color:var(--unhcr-d);border-color:#bcd9ef}
+.rowsview{max-height:560px;overflow-y:auto;overflow-x:hidden;padding-right:2px}
+.rowsctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 8px}
+.rowsctl select{font-size:11.5px;padding:3px 6px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
+.acards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.acard{border:1px solid var(--line);border-left:3px solid var(--unhcr);border-radius:6px;background:#fff;padding:9px 11px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.acard:hover{box-shadow:0 2px 10px rgba(0,60,110,.09)}
+.acard .top{display:flex;align-items:flex-start;gap:8px}
+.acard .pn{font-size:12.5px;font-weight:800;color:var(--unhcr-d);line-height:1.3;min-width:0;overflow-wrap:anywhere}
+.acard .pn small{display:block;font-weight:600;color:var(--muted);font-size:10.5px;margin-top:1px}
+.acard .st{margin-left:auto;font-size:10px;font-weight:700;border-radius:10px;padding:2px 8px;white-space:nowrap;background:#eef3f7;color:var(--muted)}
+.acard .st.on{background:#e6f4ea;color:#1d6c37}
+.acard .st.done{background:#e8f2fb;color:var(--unhcr-d)}
+.acard .ttl{font-size:12px;font-weight:600;color:var(--ink);line-height:1.35;overflow-wrap:anywhere}
+.acard .ind{font-size:11px;color:#54646f;line-height:1.4;border-left:2px solid #dbe9f6;padding-left:7px;overflow-wrap:anywhere}
+.acard .nums{display:flex;gap:6px;flex-wrap:wrap}
+.num{border:1px solid var(--line);border-radius:5px;padding:3px 8px;background:#fbfcfd;min-width:70px}
+.num .n{font-size:14px;font-weight:800;color:var(--unhcr);font-variant-numeric:tabular-nums;line-height:1.2}
+.num .l{font-size:9.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.acard .foot{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:2px;border-top:1px dashed var(--line)}
+.acard .foot .tag{padding-top:2px}
+.tag.loc{color:var(--unhcr-d);border-color:#bcd9ef;background:#f2f9ff}
+.tag.sec{display:inline-flex;align-items:center;gap:4px}
+.tag.sec img{height:12px;width:auto}
+.rowsempty{padding:14px;color:var(--muted);font-size:12px;text-align:center;border:1px dashed var(--line);border-radius:6px}
+@media(max-width:900px){.acards{grid-template-columns:1fr}}
+
 /* indicator aggregation — card view */
 .aggview{margin-top:2px;max-height:560px;overflow-y:auto;overflow-x:hidden;padding-right:2px}
 .aggview .agghead{position:sticky;top:0;z-index:2}
@@ -233,11 +265,16 @@ body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
     <div class="viewtoggle">
       <button class="tgl on" id="tglRows" onclick="setView('rows')">Partner activities</button>
       <button class="tgl" id="tglAgg" onclick="setView('agg')">Indicator aggregation</button>
+      <span class="layoutsw" id="layoutsw">
+        <button class="lsw on" id="lswCards" onclick="setRowLayout('cards')" title="Card view">▤ Cards</button>
+        <button class="lsw" id="lswTable" onclick="setRowLayout('table')" title="Table view">≡ Table</button>
+      </span>
       <span class="hint" id="viewHint"></span>
     </div>
     <div class="tbl-scroll" id="tableScroll">
       <table id="dataTable"><thead></thead><tbody></tbody></table>
     </div>
+    <div id="rowsView" class="rowsview"></div>
     <div id="aggView" class="aggview" style="display:none"></div>
     <div class="tblfoot">
       <span class="hint" id="tableCount"></span>
@@ -730,9 +767,9 @@ function aggregateByIndicator(rows){
 function setView(v){ state.view=v; state.page=0;
   document.getElementById('tglRows').classList.toggle('on',v==='rows');
   document.getElementById('tglAgg').classList.toggle('on',v==='agg');
-  document.getElementById('tableScroll').style.display = v==='agg'?'none':'';
-  document.getElementById('aggView').style.display     = v==='agg'?'':'none';
-  sortState={col:null,dir:1}; renderTable(filtered());
+  document.getElementById('aggView').style.display   = v==='agg'?'':'none';
+  document.getElementById('layoutsw').style.display  = v==='agg'?'none':'';
+  sortState={col:null,dir:1}; applyRowLayout(); renderTable(filtered());
 }
 let sortState={col:null,dir:1};
 let tableCols=[];
@@ -843,8 +880,89 @@ function renderAggCards(rows){
   sel.value=aggSort; sel.onchange=()=>setAggSort(sel.value);
   host.querySelectorAll('.agghead').forEach(h=>h.onclick=()=>toggleAggGroup(h.dataset.g));
 }
+/* ---------- partner activities: card view ----------
+   Same rows, same filters, same pager as the table — one card per reported
+   activity, with the achievement figures pulled out as the focal point.  */
+let rowLayout='cards';
+let rowSort='partner';
+function applyRowLayout(){
+  const agg=(state.view||'rows')==='agg';
+  document.getElementById('tableScroll').style.display = (agg||rowLayout==='cards')?'none':'';
+  document.getElementById('rowsView').style.display    = (agg||rowLayout!=='cards')?'none':'';
+  document.getElementById('lswCards').classList.toggle('on',rowLayout==='cards');
+  document.getElementById('lswTable').classList.toggle('on',rowLayout==='table');
+}
+function setRowLayout(v){ rowLayout=v; state.page=0; applyRowLayout(); renderTable(filtered()); }
+function setRowSort(v){ rowSort=v; state.page=0; renderTable(filtered()); }
+const ROW_SORTS={
+  partner:    ['Partner (A \u2192 Z)',      (a,b)=>String(a.partner).localeCompare(String(b.partner))],
+  achievement:['Achievement (high \u2192 low)',(a,b)=>numOf(b.grand)-numOf(a.grand)],
+  sector:     ['Sector (A \u2192 Z)',       (a,b)=>String(a.sector).localeCompare(String(b.sector))],
+  start:      ['Start date (newest first)',(a,b)=>String(b.startDate).localeCompare(String(a.startDate))],
+  end:        ['End date (soonest first)', (a,b)=>String(a.endDate).localeCompare(String(b.endDate))],
+  location:   ['Location (A \u2192 Z)',     (a,b)=>dispList(a.admin1||a.scope).localeCompare(dispList(b.admin1||b.scope))]
+};
+const fmtDate = d => { const s=String(d||'').trim(); return /^\d{4}-\d{2}-\d{2}/.test(s)?s.slice(0,10):s; };
+function statusClass(s){ const n=norm(s);
+  if(n.includes('ongoing')||n.includes('active')||n.includes('implement')) return 'on';
+  if(n.includes('complete')||n.includes('finish')||n.includes('closed')) return 'done';
+  return ''; }
+
+function activityCard(r){
+  const nums=[];
+  if(r.achievement!=='') nums.push([r.achievement,'Total']);
+  if(r.refugees!=='')    nums.push([r.refugees,'Refugees']);
+  if(r.host!=='')        nums.push([r.host,'Host community']);
+  const locs=dispList(r.admin1||r.scope).split(', ').filter(Boolean);
+  const dates=[fmtDate(r.startDate),fmtDate(r.endDate)].filter(Boolean).join(' \u2192 ');
+  const foot=[];
+  (r.sectors||[]).forEach(sec=>foot.push(
+    `<span class="tag sec"><img src="${iconForSector(sec)}" alt="" onerror="this.style.display='none'">${escapeHtml(sec)}</span>`));
+  if(locs.length) foot.push(locs.map(l=>`<span class="tag loc nw">${escapeHtml(l)}</span>`).join(''));
+  else if(r.countrywide) foot.push('<span class="tag loc nw">Country-wide</span>');
+  if(dates) foot.push(`<span class="tag nw">${escapeHtml(dates)}</span>`);
+  if(r.modality) foot.push(`<span class="tag">${escapeHtml(r.modality)}</span>`);
+  return `<div class="acard">
+    <div class="top">
+      <div class="pn">${escapeHtml(r.partner||'(partner not stated)')}
+        <small>${escapeHtml([r.orgType,r.agency].filter(Boolean).join(' \u00b7 '))}</small></div>
+      ${r.status?`<span class="st ${statusClass(r.status)}">${escapeHtml(r.status)}</span>`:''}
+    </div>
+    ${r.activity?`<div class="ttl">${escapeHtml(r.activity)}</div>`:''}
+    ${r.indicator?`<div class="ind">${escapeHtml(r.indicator)}</div>`:''}
+    ${nums.length?`<div class="nums">${nums.map(([v,l])=>
+      `<div class="num"><div class="n">${numOf(v).toLocaleString()}</div><div class="l">${l}</div></div>`).join('')}</div>`:''}
+    <div class="foot">${foot.join('')}</div>
+  </div>`;
+}
+
+function renderRowsCards(rows){
+  const host=document.getElementById('rowsView');
+  const r=rows.slice().sort((ROW_SORTS[rowSort]||ROW_SORTS.partner)[1]);
+  const total=r.length;
+  const size=(state.pageSize==='all')?total:(state.pageSize||500);
+  const pages=Math.max(1,Math.ceil(total/(size||1)));
+  if(state.page>=pages) state.page=pages-1;
+  if(state.page<0) state.page=0;
+  const start=(size===total||size===0)?0:state.page*size;
+  const end=Math.min(total,start+(size||total));
+  const ctl=`<div class="rowsctl"><label class="hint">Sort activities
+      <select id="rowSortSel">${Object.entries(ROW_SORTS).map(([k,v])=>
+        `<option value="${k}">${v[0]}</option>`).join('')}</select></label></div>`;
+  host.innerHTML = total
+    ? ctl+'<div class="acards">'+r.slice(start,end).map(activityCard).join('')+'</div>'
+    : ctl+'<div class="rowsempty">No activities match the current filters.</div>';
+  const sel=document.getElementById('rowSortSel'); sel.value=rowSort; sel.onchange=()=>setRowSort(sel.value);
+  document.getElementById('tableCount').textContent=
+    total?`Showing ${(start+1).toLocaleString()}\u2013${end.toLocaleString()} of ${total.toLocaleString()} activities`
+         :'No activities match the current filters';
+  showPager(true,pages);
+}
 function renderTable(rows){
+  applyRowLayout();
   if((state.view||'rows')==='agg') return renderAggCards(rows);
+  document.getElementById('viewHint').textContent='Each card is one reported activity.';
+  if(rowLayout==='cards') return renderRowsCards(rows);
   document.getElementById('viewHint').textContent='Each row is one reported activity.';
   if(!tableCols.length) buildTableCols();
   const thead=document.querySelector('#dataTable thead');
@@ -887,7 +1005,9 @@ function showPager(show,pages){
 }
 function setPageSize(v){ state.pageSize=(v==='all')?'all':parseInt(v,10); state.page=0; renderTable(filtered()); }
 function pageStep(d){ state.page=(state.page||0)+d; renderTable(filtered());
-  document.querySelector('.tbl-scroll').scrollTop=0; }
+  const box=(rowLayout==='cards'&&(state.view||'rows')!=='agg')
+    ? document.getElementById('rowsView') : document.querySelector('.tbl-scroll');
+  if(box) box.scrollTop=0; }
 function escapeHtml(s){return String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));}
 
 /* ---------- dropdown filters ---------- */
