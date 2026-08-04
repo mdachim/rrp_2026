@@ -162,44 +162,58 @@ tbody tr:nth-child(even){background:#f7fafc}
   .lrow .n-t::before{content:'Total: '}
 }
 
-/* indicator aggregation — card view */
-.aggview{margin-top:2px;max-height:560px;overflow-y:auto;overflow-x:hidden;padding-right:2px}
-.aggview .agghead{position:sticky;top:0;z-index:2}
+/* indicator aggregation — accordion with target tracking */
+.aggview{max-height:620px;overflow-y:auto;overflow-x:hidden;padding-right:2px}
 .aggtop{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin-bottom:10px}
 .aggstat{flex:1 1 130px;border:1px solid var(--line);border-left:3px solid var(--unhcr);border-radius:6px;padding:7px 10px;background:#fbfcfd}
 .aggstat .n{font-size:22px;font-weight:800;color:var(--unhcr);line-height:1.1}
 .aggstat .l{font-size:10.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
-.aggctl{display:flex;gap:8px;align-items:center;margin:0 0 8px;flex-wrap:wrap}
-.aggctl select{font-size:11.5px;padding:3px 6px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
-.agggroup{border:1px solid var(--line);border-radius:6px;margin-bottom:10px;overflow:hidden;background:#fff}
-.agghead{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--panel);border-bottom:1px solid var(--line);cursor:pointer;user-select:none}
-.agghead img{height:20px;width:auto}
-.agghead .gt{font-size:12.5px;font-weight:800;color:var(--unhcr-d)}
-.agghead .gm{font-size:11px;color:var(--muted);margin-left:auto;white-space:nowrap}
-.agghead .caret{font-size:10px;color:var(--muted);width:10px}
-.agggroup.closed .aggbody{display:none}
-.aggbody{padding:2px 0}
-.aggcard{display:grid;grid-template-columns:1fr 190px;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--line)}
-.aggcard:last-child{border-bottom:0}
-.aggcard:hover{background:#f7fafc}
-.aggcard .ind{font-size:12px;font-weight:600;color:var(--ink);line-height:1.35}
-.aggcard .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px;align-items:center}
-.tag{font-size:10px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:1px 7px;background:#fff;white-space:normal;line-height:1.5}
-.tag.nw{white-space:nowrap}
-.tag.m{color:var(--unhcr-d);border-color:#bcd9ef;background:#eef6fc}
-.aggcard .val{text-align:right}
-.aggcard .val .n{font-size:20px;font-weight:800;color:var(--unhcr);font-variant-numeric:tabular-nums;line-height:1.1}
-.aggcard .val .u{font-size:10px;color:var(--muted);font-weight:600}
-.aggcard .val .none{font-size:12px;color:var(--muted);font-weight:600}
-.sbar{display:flex;height:7px;border-radius:4px;overflow:hidden;background:#eef3f7;margin-top:6px}
-.sbar i{display:block;height:100%}
-.sbar i.ref{background:var(--unhcr)}
-.sbar i.host{background:#9ecae1}
-.splits{display:flex;gap:10px;justify-content:flex-end;font-size:10.5px;color:var(--muted);margin-top:4px;white-space:nowrap}
-.splits b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
-.splits i{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:3px}
+.aggview .acc-head img{height:18px;width:auto;flex:0 0 auto}
+.pbar{height:6px;border-radius:4px;background:#eef3f7;overflow:hidden;min-width:60px}
+.pbar i{display:block;height:100%;background:var(--unhcr);border-radius:4px}
+.pbar i.met{background:#2f9e5e}
+.pbar i.low{background:#7fb2d9}
+.pct{font-size:11px;font-weight:800;color:var(--unhcr-d);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pct.met{color:#1d6c37}
+.pct.none{color:var(--muted);font-weight:600}
+.ihdr,.irow{display:grid;grid-template-columns:1fr 88px 88px 132px 88px;gap:10px;align-items:center;padding:7px 11px 7px 26px}
+.ihdr{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:700;background:#fbfcfd;border-top:1px solid var(--line)}
+.ihdr .num,.irow .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.irow{border-top:1px solid #f2f5f8;font-size:11.5px;cursor:pointer}
+.irow:hover{background:#f7fafc}
+.irow .iname{line-height:1.4;overflow-wrap:anywhere;display:flex;gap:6px;align-items:flex-start}
+.irow .iname .chev{font-size:9px;color:var(--muted);transition:transform .15s;margin-top:3px}
+.irow.open .chev{transform:rotate(90deg)}
+.irow .num.t{font-weight:700;color:var(--ink)}
+.irow .num.a{font-weight:800;color:var(--unhcr)}
+.prog{display:flex;gap:7px;align-items:center}
+.pbtn{border:1px solid #bcd9ef;background:#eef6fc;color:var(--unhcr-d);border-radius:10px;padding:2px 9px;font-size:10.5px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
+.pbtn:hover{background:var(--unhcr);color:#fff;border-color:var(--unhcr)}
+.idet{display:none;padding:8px 12px 11px 40px;background:#fafcfe;border-top:1px solid #f2f5f8;font-size:11.5px}
+.idet.open{display:block}
+.idet .dgrid{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.idet .d{min-width:110px}
+.idet .d .l{font-size:9.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:700}
+.idet .d .v{font-size:12px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.idet .cap{font-size:10.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin:6px 0 4px}
+.ptbl{width:100%;border-collapse:collapse;font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.ptbl th{text-align:left;padding:5px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);background:#f6f9fb;border-bottom:1px solid var(--line);font-weight:700;position:static}
+.ptbl th.num,.ptbl td.num{text-align:right;font-variant-numeric:tabular-nums}
+.ptbl td{padding:5px 8px;border-bottom:1px solid #f2f5f8}
+.ptbl tr.clickable{cursor:pointer}
+.ptbl tr.clickable:hover td{background:#eef6fc}
+.ptbl tr.on td{background:#e8f2fb;font-weight:700}
+.ptbl .pn{overflow-wrap:anywhere}
+.ptbl .flt{font-size:9.5px;color:var(--unhcr);font-weight:700;white-space:nowrap}
 .aggempty{padding:14px;color:var(--muted);font-size:12px;text-align:center;border:1px dashed var(--line);border-radius:6px}
-@media(max-width:680px){.aggcard{grid-template-columns:1fr}.aggcard .val{text-align:left}.splits{justify-content:flex-start}}
+@media(max-width:900px){
+  .ihdr{display:none}
+  .irow{grid-template-columns:1fr;gap:4px;padding:9px 11px 9px 20px}
+  .irow .num{text-align:left}
+  .irow .num::before{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px;margin-right:5px;font-weight:700}
+  .irow .num.t::before{content:'Target: '}
+  .irow .num.a::before{content:'Achieved: '}
+}
 .leaflet-tooltip.rt{font-size:11px;font-weight:600}
 .hint{font-size:10.5px;color:var(--muted)}
 .legend{display:flex;gap:4px;align-items:center;font-size:10px;color:var(--muted);margin-top:5px}
@@ -408,9 +422,13 @@ const MOLDOVA_GEOJSON = {"type":"FeatureCollection","features":[{"type":"Feature
    updated independently of this page:
      indicator_config.json  — indicator methodology / sector / outcome / activity / unit
      partner_types.json     — partner -> organization type
+     targets_2026.json      — 2026 targets per indicator (built by build_targets.py
+                              from the submissions extract + the target methodology)
    Both accept either a keyed object or a plain array exported from Excel. */
 let INDICATOR_CONFIG = {};
 let PARTNER_TYPES = {};
+let TARGETS = {};        // norm(indicator) -> 2026 target entry (targets_2026.json)
+let TARGETS_META = null;
 
 /* ============================================================ */
 const norm = s => (s==null?"":String(s)).normalize("NFKD")
@@ -810,102 +828,180 @@ function buildTableCols(){
   cols.push(F.admin1?["admin1","Admin 1"]:["scope","Geographical scope"]);
   tableCols=cols;
 }
-/* ---------- indicator aggregation: card view ----------
-   One card per indicator, grouped by sector. The headline figure is the
-   indicator's grand total run through its own methodology; the split bar
-   shows the refugee / host-community composition of that figure.        */
+/* ---------- indicator aggregation: accordion with target tracking ----------
+   Sector -> indicator. Each indicator line shows the 2026 target from
+   targets_2026.json, the achievement aggregated per its methodology, and
+   progress against the target. Expanding a line (or clicking the partner
+   count) breaks it down by partner, and every partner is clickable as a
+   filter over the whole dashboard.                                       */
 let aggSort='value';
-let aggClosed=new Set();
-function setAggSort(v){ aggSort=v; renderTable(filtered()); }
-function toggleAggGroup(key){ if(aggClosed.has(key)) aggClosed.delete(key); else aggClosed.add(key); renderTable(filtered()); }
+let aggQuery='';
+let aggOpen=new Set();       // expanded indicator detail rows
+let aggClosedSec=new Set();  // collapsed sector groups
 const fmtN = v => (v===''||v===null||v===undefined)?'':numOf(v).toLocaleString();
+function setAggSort(v){ aggSort=v; renderTable(filtered()); }
+function setAggQuery(q){ aggQuery=q.trim().toLowerCase(); renderTable(filtered()); }
+function expandAllAgg(open){
+  document.querySelectorAll('#aggView .acc-group').forEach(g=>{
+    g.classList.toggle('open',open); if(open) aggClosedSec.delete(g.dataset.k); else aggClosedSec.add(g.dataset.k); });
+}
+const AGG_SORTS={
+  value:    ['Achievement (high → low)', (x,y)=>numOf(y.grand)-numOf(x.grand)],
+  progress: ['Progress vs target (low → high)', (x,y)=>(x.pct===null?2:x.pct)-(y.pct===null?2:y.pct)],
+  target:   ['Target (high → low)', (x,y)=>numOf(y.target)-numOf(x.target)],
+  indicator:['Indicator (A → Z)', (x,y)=>String(x.indicator).localeCompare(String(y.indicator))],
+  partners: ['Partners (high → low)', (x,y)=>y.partners-x.partners]
+};
+function progressBar(pct){
+  if(pct===null) return '<span class="pct none">no target</span>';
+  const w=Math.max(2,Math.min(100,Math.round(pct*100)));
+  const cls=pct>=1?'met':(pct<.25?'low':'');
+  return `<div class="prog"><div class="pbar"><i class="${cls}" style="width:${w}%"></i></div>`+
+         `<span class="pct${pct>=1?' met':''}">${Math.round(pct*100)}%</span></div>`;
+}
+/* achievement for one indicator group, restricted to a subset of its rows */
+function achievedFor(rs,method){ return numOf(aggMeasure(rs,'grand',method)); }
 
-function renderAggCards(rows){
-  const agg=aggregateByIndicator(rows);
+function renderAggList(rows){
   const host=document.getElementById('aggView');
-  document.getElementById('viewHint').textContent='One card per indicator, aggregated per its methodology.';
-  document.getElementById('tableCount').textContent=
-    `${agg.length} indicators (from ${rows.length.toLocaleString()} activity rows)`;
-  showPager(false);
+  document.getElementById('viewHint').textContent='Indicators against their 2026 targets — expand for the partner breakdown.';
+  let agg=aggregateByIndicator(rows);
+  // join the 2026 targets and compute progress
+  agg.forEach(a=>{
+    const t=TARGETS[norm(a.indicator)];
+    a.target      = t?t.target:'';
+    a.targetMethod= t?t.method:'';
+    a.targetPartners = t?(t.byPartner||[]):[];
+    a.pct = (t&&numOf(t.target)>0) ? numOf(a.grand)/numOf(t.target) : null;
+  });
+  if(aggQuery) agg=agg.filter(a=>[a.indicator,a.sector,a.outcome,a.rrpActivity]
+      .join(' ').toLowerCase().includes(aggQuery));
 
-  if(!agg.length){ host.innerHTML='<div class="aggempty">No indicators match the current filters.</div>'; return; }
-
-  // summary strip — counts only, never a cross-indicator sum of people
-  const sectors=new Set(agg.map(a=>a.sector||'Not specified'));
+  const withT=agg.filter(a=>a.pct!==null);
+  const sumT=withT.reduce((s,a)=>s+numOf(a.target),0);
+  const sumA=withT.reduce((s,a)=>s+numOf(a.grand),0);
   const stats=[
     [agg.length,'Indicators reported'],
-    [sectors.size,'Sectors'],
+    [withT.length,'With a 2026 target'],
     [distinct(rows,'partner'),'Partners'],
     [new Set(rows.flatMap(r=>r.raions)).size,'Raions covered'],
-    [rows.length,'Activity rows']
+    [sumT?Math.round(sumA/sumT*100)+'%':'–','Overall progress']
   ];
 
-  // group by sector
+  const ctl=`<div class="rowsctl">
+      <input class="searchbox" id="aggSearch" type="text" placeholder="Search indicator, sector, activity…" value="${escapeHtml(aggQuery)}">
+      <label class="hint">Sort <select id="aggSortSel">${Object.entries(AGG_SORTS).map(([k,v])=>
+        `<option value="${k}">${v[0]}</option>`).join('')}</select></label>
+      <button class="btn-sm" id="aggExpand">Expand all</button>
+      <button class="btn-sm" id="aggCollapse">Collapse all</button>
+    </div>`;
+
   const groups=new Map();
   agg.forEach(a=>{ const s=a.sector||'Not specified'; if(!groups.has(s))groups.set(s,[]); groups.get(s).push(a); });
-  const sorters={
-    value:    (x,y)=>numOf(y.grand)-numOf(x.grand),
-    indicator:(x,y)=>String(x.indicator).localeCompare(String(y.indicator)),
-    partners: (x,y)=>y.partners-x.partners,
-    raions:   (x,y)=>y.nraions-x.nraions
-  };
-  const sorter=sorters[aggSort]||sorters.value;
-  const groupList=[...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
+  const sorter=(AGG_SORTS[aggSort]||AGG_SORTS.value)[1];
 
-  const card=a=>{
-    const ref=numOf(a.refugees), hst=numOf(a.host), tot=numOf(a.grand);
-    const split=(a.refugees!==''||a.host!=='')&&(ref+hst)>0;
-    const pRef=split?Math.round(ref/(ref+hst)*100):0;
-    const meta=[];
-    if(a.rrpActivity) meta.push(`<span class="tag">${escapeHtml(a.rrpActivity)}</span>`);
-    if(a.outcome)     meta.push(`<span class="tag">${escapeHtml(a.outcome)}</span>`);
-    meta.push(`<span class="tag m nw" title="Aggregation methodology">${escapeHtml(a.method)}</span>`);
-    meta.push(`<span class="tag nw">${a.partners} partner${a.partners===1?'':'s'}</span>`);
-    meta.push(`<span class="tag nw">${a.nraions} raion${a.nraions===1?'':'s'}</span>`);
-    return `<div class="aggcard">
-      <div>
-        <div class="ind">${escapeHtml(a.indicator)}</div>
-        <div class="meta">${meta.join('')}</div>
+  // rows of this indicator, per partner, for the breakdown table
+  const rowsByIndicator=new Map();
+  rows.forEach(r=>{ const k=norm(r.indicator); if(!k)return;
+    if(!rowsByIndicator.has(k)) rowsByIndicator.set(k,[]); rowsByIndicator.get(k).push(r); });
+
+  const detail=a=>{
+    const k=norm(a.indicator);
+    const rs=rowsByIndicator.get(k)||[];
+    const byP=new Map();
+    rs.forEach(r=>{ const p=r.partner||'(not stated)'; if(!byP.has(p))byP.set(p,[]); byP.get(p).push(r); });
+    const tByP=new Map((a.targetPartners||[]).map(p=>[norm(p.partner),p]));
+    const names=new Set([...byP.keys()]);
+    (a.targetPartners||[]).forEach(p=>{ if(![...names].some(n=>norm(n)===norm(p.partner))) names.add(p.partner); });
+    const lines=[...names].map(p=>{
+      const rsP=byP.get(p)||[];
+      const ach=rsP.length?achievedFor(rsP,a.method):'';
+      const tp=tByP.get(norm(p));
+      const active=state.filters.partner.has(p);
+      return {p,ach,tgt:tp?tp.target:'',reporting:!!rsP.length,active};
+    }).sort((x,y)=>numOf(y.ach)-numOf(x.ach)||String(x.p).localeCompare(String(y.p)));
+    const body=lines.map(l=>
+      `<tr class="${l.reporting?'clickable':''}${l.active?' on':''}"${l.reporting?` data-p="${escapeHtml(l.p)}"`:''}>
+        <td class="pn">${escapeHtml(l.p)}${l.reporting?'':' <span class="hint">(no reporting yet)</span>'}</td>
+        <td class="num">${l.tgt===''?'–':fmtN(l.tgt)}</td>
+        <td class="num">${l.ach===''?'–':fmtN(l.ach)}</td>
+        <td class="flt">${l.active?'filtered':''}</td></tr>`).join('');
+    const d=(l,v)=>`<div class="d"><div class="l">${l}</div><div class="v">${v}</div></div>`;
+    return `<div class="idet${aggOpen.has(k)?' open':''}" data-d="${escapeHtml(k)}">
+      <div class="dgrid">
+        ${d('Unit',escapeHtml(a.unit||'–'))}
+        ${d('Achievement method',escapeHtml(a.method))}
+        ${d('Target method',escapeHtml(a.targetMethod||'–'))}
+        ${d('Refugees',a.refugees===''?'–':fmtN(a.refugees))}
+        ${d('Host community',a.host===''?'–':fmtN(a.host))}
+        ${d('Raions covered',a.nraions)}
+        ${d('Activity rows',a.nrows)}
       </div>
-      <div class="val">
-        ${tot?`<div class="n">${tot.toLocaleString()}</div><div class="u">${escapeHtml(a.unit||'reported')}</div>`
-             :`<div class="none">not reported</div>`}
-        ${split?`<div class="sbar"><i class="ref" style="width:${pRef}%"></i><i class="host" style="width:${100-pRef}%"></i></div>
-          <div class="splits">${ref?`<span><i style="background:var(--unhcr)"></i>Refugees <b>${fmtN(ref)}</b></span>`:''}
-          ${hst?`<span><i style="background:#9ecae1"></i>Host <b>${fmtN(hst)}</b></span>`:''}</div>`:''}
-      </div>
+      ${a.rrpActivity?`<div class="hint">${escapeHtml(a.rrpActivity)}</div>`:''}
+      <div class="cap">Partners — click one to filter the whole dashboard</div>
+      <table class="ptbl"><thead><tr><th>Partner</th><th class="num">Target 2026</th>
+        <th class="num">Achieved</th><th></th></tr></thead><tbody>${body}</tbody></table>
     </div>`;
+  };
+
+  const line=a=>{
+    const k=norm(a.indicator);
+    const open=aggOpen.has(k)?' open':'';
+    return `<div class="irow${open}" data-i="${escapeHtml(k)}">
+        <div class="iname"><span class="chev">▶</span><span>${escapeHtml(a.indicator)}</span></div>
+        <div class="num t">${a.target===''?'–':fmtN(a.target)}</div>
+        <div class="num a">${numOf(a.grand)?numOf(a.grand).toLocaleString():'–'}</div>
+        <div>${progressBar(a.pct)}</div>
+        <div class="num"><button class="pbtn" data-i="${escapeHtml(k)}" title="Show the partner breakdown">${a.partners} partner${a.partners===1?'':'s'}</button></div>
+      </div>${detail(a)}`;
   };
 
   host.innerHTML =
     '<div class="aggtop">'+stats.map(([n,l])=>
-      `<div class="aggstat"><div class="n">${Number(n).toLocaleString()}</div><div class="l">${escapeHtml(l)}</div></div>`).join('')+'</div>'+
-    `<div class="aggctl"><label class="hint">Sort indicators
-       <select id="aggSortSel">
-         <option value="value">Achievement (high → low)</option>
-         <option value="indicator">Indicator (A → Z)</option>
-         <option value="partners">Partners (high → low)</option>
-         <option value="raions">Raions covered (high → low)</option>
-       </select></label>
-       <span class="hint">Click a sector header to collapse it.</span></div>`+
-    groupList.map(([sec,list])=>{
-      const closed=aggClosed.has(sec)?' closed':'';
-      const np=new Set(rows.filter(r=>(r.sectors||[]).includes(sec)).map(r=>r.partner).filter(Boolean)).size;
-      return `<div class="agggroup${closed}">
-        <div class="agghead" data-g="${escapeHtml(sec)}">
-          <span class="caret">${closed?'\u25b8':'\u25be'}</span>
+      `<div class="aggstat"><div class="n">${typeof n==='number'?n.toLocaleString():n}</div><div class="l">${escapeHtml(l)}</div></div>`).join('')+'</div>'+ ctl +
+    ([...groups.entries()].sort((x,y)=>x[0].localeCompare(y[0])).map(([sec,list])=>{
+      const open=aggClosedSec.has(sec)?'':' open';
+      const wt=list.filter(a=>a.pct!==null);
+      const st=wt.reduce((s,a)=>s+numOf(a.target),0), sa=wt.reduce((s,a)=>s+numOf(a.grand),0);
+      const pct=st?sa/st:null;
+      return `<div class="acc-group${open}" data-k="${escapeHtml(sec)}">
+        <div class="acc-head"><span class="chev">▶</span>
           <img src="${iconForSector(sec)}" alt="" onerror="this.style.display='none'">
-          <span class="gt">${escapeHtml(sec)}</span>
-          <span class="gm">${list.length} indicator${list.length===1?'':'s'} \u00b7 ${np} partner${np===1?'':'s'}</span>
-        </div>
-        <div class="aggbody">${list.slice().sort(sorter).map(card).join('')}</div>
-      </div>`;
-    }).join('');
+          <span class="a-title">${escapeHtml(sec)}</span>
+          <span class="a-cnt">${list.length} indicator${list.length===1?'':'s'}</span>
+          <span class="a-val" title="Achieved / target across the indicators of this sector that have a target">${progressBar(pct)}</span></div>
+        <div class="acc-body">
+          <div class="ihdr"><div>Indicator</div><div class="num">Target 2026</div><div class="num">Achieved</div>
+            <div>Progress</div><div class="num">Partners</div></div>
+          ${list.slice().sort(sorter).map(line).join('')}
+        </div></div>`;
+    }).join('') || '<div class="aggempty">No indicators match the current filters.</div>');
 
-  const sel=document.getElementById('aggSortSel');
-  sel.value=aggSort; sel.onchange=()=>setAggSort(sel.value);
-  host.querySelectorAll('.agghead').forEach(h=>h.onclick=()=>toggleAggGroup(h.dataset.g));
+  // wiring
+  host.querySelectorAll('.acc-head').forEach(h=>h.onclick=()=>{
+    const g=h.parentElement, k=g.dataset.k;
+    if(g.classList.toggle('open')) aggClosedSec.delete(k); else aggClosedSec.add(k);
+  });
+  const toggleDetail=k=>{ if(aggOpen.has(k)) aggOpen.delete(k); else aggOpen.add(k);
+    host.querySelector(`.irow[data-i="${CSS.escape(k)}"]`).classList.toggle('open',aggOpen.has(k));
+    host.querySelector(`.idet[data-d="${CSS.escape(k)}"]`).classList.toggle('open',aggOpen.has(k)); };
+  host.querySelectorAll('.irow').forEach(r=>r.onclick=()=>toggleDetail(r.dataset.i));
+  host.querySelectorAll('.pbtn').forEach(btn=>btn.onclick=e=>{ e.stopPropagation(); toggleDetail(btn.dataset.i); });
+  host.querySelectorAll('.ptbl tr.clickable').forEach(tr=>tr.onclick=e=>{
+    e.stopPropagation(); toggleFilter('partner',tr.dataset.p); });
+  const sel=document.getElementById('aggSortSel'); sel.value=aggSort; sel.onchange=()=>setAggSort(sel.value);
+  document.getElementById('aggExpand').onclick=()=>expandAllAgg(true);
+  document.getElementById('aggCollapse').onclick=()=>expandAllAgg(false);
+  const sb=document.getElementById('aggSearch');
+  sb.oninput=()=>{ const pos=sb.selectionStart; setAggQuery(sb.value);
+    const nb=document.getElementById('aggSearch'); nb.focus(); nb.setSelectionRange(pos,pos); };
+
+  document.getElementById('tableCount').textContent=
+    `${agg.length} indicators (from ${rows.length.toLocaleString()} activity rows)`
+    +(withT.length?` · ${withT.length} tracked against a 2026 target`:'');
+  showPager(false);
 }
+
 /* ---------- partner activities: accordion list ----------
    Partner -> project -> activity lines. Same rows and filters as the table,
    collapsed by default so the section stays light.                       */
@@ -1027,7 +1123,7 @@ function renderRowsList(rows){
 }
 function renderTable(rows){
   applyRowLayout();
-  if((state.view||'rows')==='agg') return renderAggCards(rows);
+  if((state.view||'rows')==='agg') return renderAggList(rows);
   document.getElementById('viewHint').textContent='Grouped by partner and project \u2014 expand to see the reported lines.';
   if(rowLayout==='list') return renderRowsList(rows);
   document.getElementById('viewHint').textContent='Each row is one reported activity.';
@@ -1167,6 +1263,26 @@ function parseIndicatorConfig(j){
   }
   return out;
 }
+/* targets_2026.json — {meta, indicators:[{indicator,target,method,byPartner,...}]}.
+   A plain array of the same entries is accepted too. Keyed by norm(indicator),
+   which is how the achievement rows are joined to their target. */
+function parseTargets(j){
+  const out={};
+  const list=Array.isArray(j)?j:(j&&j.indicators)||[];
+  list.forEach(e=>{ const name=e.indicator||e.Indicator; if(!name) return;
+    out[norm(name)]={
+      indicator:String(name),
+      sector:e.sector||'', outcome:e.outcome||'', activity:e.activity||'',
+      method:e.method||'Sum',
+      target:numOf(e.target),
+      budget:numOf(e.budget),
+      partners:e.partners||((e.byPartner||[]).length),
+      byPartner:(e.byPartner||[]).map(p=>({partner:String(p.partner||''),target:numOf(p.target),budget:numOf(p.budget)}))
+    };
+  });
+  return out;
+}
+
 /* Accepts {normalizedName:"Type"} or an array of {Partner, Type} rows. */
 function parsePartnerTypes(j){
   const out={};
@@ -1192,20 +1308,25 @@ async function boot(){
   setStatus('Loading data\u2026');
   const notes=[];
   // reference tables must be in place before ingest() runs
-  const [ic,pt]=await Promise.all([
+  const [ic,pt,tg]=await Promise.all([
     fetchJson('indicator_config.json').catch(()=>null),
-    fetchJson('partner_types.json').catch(()=>null)
+    fetchJson('partner_types.json').catch(()=>null),
+    fetchJson('targets_2026.json').catch(()=>null)
   ]);
   INDICATOR_CONFIG = ic?parseIndicatorConfig(ic):{};
   PARTNER_TYPES    = pt?parsePartnerTypes(pt):{};
+  TARGETS          = tg?parseTargets(tg):{};
+  TARGETS_META     = (tg&&tg.meta)||null;
   if(!ic) notes.push('indicator_config.json missing \u2014 aggregation defaults to Sum');
   if(!pt) notes.push('partner_types.json missing \u2014 organization types unavailable');
+  if(!tg) notes.push('targets_2026.json missing \u2014 no 2026 targets to track against');
   try{
     const j=await fetchJson('data.json');
     const rows=Array.isArray(j)?j:(j.rows||j.data||[]);
     if(!rows.length) throw new Error('data.json contains no rows');
     ingest(rows);
     setStatus(`Loaded ${state.data.length} ${state.unit} \u00b7 ${Object.keys(INDICATOR_CONFIG).length} indicators \u00b7 ${Object.keys(PARTNER_TYPES).length} partners`
+      +(Object.keys(TARGETS).length?` \u00b7 ${Object.keys(TARGETS).length} targets 2026`:'')
       +(notes.length?'  \u26a0 '+notes.join('; '):''));
   }catch(e){
     setStatus('Could not load data.json \u2014 '+e.message+
