@@ -104,6 +104,44 @@ thead th{position:sticky;top:0;background:var(--unhcr);color:#fff;text-align:lef
 thead th:hover{background:var(--unhcr-d)}
 tbody td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
 tbody tr:nth-child(even){background:#f7fafc}
+/* indicator aggregation — card view */
+.aggview{margin-top:2px;max-height:560px;overflow-y:auto;overflow-x:hidden;padding-right:2px}
+.aggview .agghead{position:sticky;top:0;z-index:2}
+.aggtop{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin-bottom:10px}
+.aggstat{flex:1 1 130px;border:1px solid var(--line);border-left:3px solid var(--unhcr);border-radius:6px;padding:7px 10px;background:#fbfcfd}
+.aggstat .n{font-size:22px;font-weight:800;color:var(--unhcr);line-height:1.1}
+.aggstat .l{font-size:10.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.aggctl{display:flex;gap:8px;align-items:center;margin:0 0 8px;flex-wrap:wrap}
+.aggctl select{font-size:11.5px;padding:3px 6px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
+.agggroup{border:1px solid var(--line);border-radius:6px;margin-bottom:10px;overflow:hidden;background:#fff}
+.agghead{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--panel);border-bottom:1px solid var(--line);cursor:pointer;user-select:none}
+.agghead img{height:20px;width:auto}
+.agghead .gt{font-size:12.5px;font-weight:800;color:var(--unhcr-d)}
+.agghead .gm{font-size:11px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.agghead .caret{font-size:10px;color:var(--muted);width:10px}
+.agggroup.closed .aggbody{display:none}
+.aggbody{padding:2px 0}
+.aggcard{display:grid;grid-template-columns:1fr 190px;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--line)}
+.aggcard:last-child{border-bottom:0}
+.aggcard:hover{background:#f7fafc}
+.aggcard .ind{font-size:12px;font-weight:600;color:var(--ink);line-height:1.35}
+.aggcard .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px;align-items:center}
+.tag{font-size:10px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:1px 7px;background:#fff;white-space:normal;line-height:1.5}
+.tag.nw{white-space:nowrap}
+.tag.m{color:var(--unhcr-d);border-color:#bcd9ef;background:#eef6fc}
+.aggcard .val{text-align:right}
+.aggcard .val .n{font-size:20px;font-weight:800;color:var(--unhcr);font-variant-numeric:tabular-nums;line-height:1.1}
+.aggcard .val .u{font-size:10px;color:var(--muted);font-weight:600}
+.aggcard .val .none{font-size:12px;color:var(--muted);font-weight:600}
+.sbar{display:flex;height:7px;border-radius:4px;overflow:hidden;background:#eef3f7;margin-top:6px}
+.sbar i{display:block;height:100%}
+.sbar i.ref{background:var(--unhcr)}
+.sbar i.host{background:#9ecae1}
+.splits{display:flex;gap:10px;justify-content:flex-end;font-size:10.5px;color:var(--muted);margin-top:4px;white-space:nowrap}
+.splits b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.splits i{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:3px}
+.aggempty{padding:14px;color:var(--muted);font-size:12px;text-align:center;border:1px dashed var(--line);border-radius:6px}
+@media(max-width:680px){.aggcard{grid-template-columns:1fr}.aggcard .val{text-align:left}.splits{justify-content:flex-start}}
 .leaflet-tooltip.rt{font-size:11px;font-weight:600}
 .hint{font-size:10.5px;color:var(--muted)}
 .legend{display:flex;gap:4px;align-items:center;font-size:10px;color:var(--muted);margin-top:5px}
@@ -197,9 +235,10 @@ body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
       <button class="tgl" id="tglAgg" onclick="setView('agg')">Indicator aggregation</button>
       <span class="hint" id="viewHint"></span>
     </div>
-    <div class="tbl-scroll">
+    <div class="tbl-scroll" id="tableScroll">
       <table id="dataTable"><thead></thead><tbody></tbody></table>
     </div>
+    <div id="aggView" class="aggview" style="display:none"></div>
     <div class="tblfoot">
       <span class="hint" id="tableCount"></span>
       <div class="pager" id="pager">
@@ -348,6 +387,14 @@ function computeAchievement(r,m){
   };
 }
 const UNHCR_BLUES=["#dbe9f6","#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#08519c","#08306b"];
+
+/* Display-only relabelling. Keys stay exactly as they are in data.json and in
+   MOLDOVA_GEOJSON, so filtering, joins and the map keep working unchanged —
+   only the label shown to the user is swapped. Keyed by norm(). */
+const DISPLAY_NAMES={ "transnistrian region":"Left Bank of Dniester" };
+const dispName = v => { const s=(v==null?"":String(v)); return DISPLAY_NAMES[norm(s)] ?? s; };
+// same, for a comma-separated list of locations
+const dispList = v => String(v==null?"":v).split(/\s*,\s*/).map(t=>t?dispName(t):t).join(", ");
 
 const state = {
   raw:[], data:[],
@@ -614,7 +661,7 @@ function renderMap(rows){
       const active=state.filters.admin1.has(f.properties.name);
       if(active) layer.setStyle({weight:2.5,color:'#00344f'});
       layer.bindTooltip(
-        `<b>${f.properties.name}</b><br>People covered: ${c.toLocaleString()}`+
+        `<b>${escapeHtml(dispName(f.properties.name))}</b><br>People covered: ${c.toLocaleString()}`+
         `<br>Partners: ${np}<br>Activities: ${na}`,{className:'rt',sticky:true});
       layer.on('click',()=>toggleFilter('admin1',f.properties.name));
       layer.on('mouseover',()=>layer.setStyle({weight:2.2}));
@@ -669,6 +716,10 @@ function aggregateByIndicator(rows){
       achievement:aggMeasure(rs,'achievement',method),
       refugees:   aggMeasure(rs,'refugees',method),
       host:       aggMeasure(rs,'host',method),
+      // headline figure: the per-row grand total (refugees+host, or the plain
+      // Total achievement when the row is not disaggregated) run through the
+      // indicator's own methodology — never a re-sum of the columns above.
+      grand:      aggMeasure(rs,'grand',method),
       partners:new Set(rs.map(r=>r.partner).filter(Boolean)).size,
       nraions: new Set(rs.flatMap(r=>r.raions)).size,
       nrows:   rs.length
@@ -679,6 +730,8 @@ function aggregateByIndicator(rows){
 function setView(v){ state.view=v; state.page=0;
   document.getElementById('tglRows').classList.toggle('on',v==='rows');
   document.getElementById('tglAgg').classList.toggle('on',v==='agg');
+  document.getElementById('tableScroll').style.display = v==='agg'?'none':'';
+  document.getElementById('aggView').style.display     = v==='agg'?'':'none';
   sortState={col:null,dir:1}; renderTable(filtered());
 }
 let sortState={col:null,dir:1};
@@ -694,35 +747,104 @@ function buildTableCols(){
   cols.push(F.admin1?["admin1","Admin 1"]:["scope","Geographical scope"]);
   tableCols=cols;
 }
-const AGG_COLS=[["outcome","Outcome area"],["sector","Sector"],["rrpActivity","Activity"],
-  ["indicator","Indicator"],["unit","Unit"],["achievement","Total achievement"],
-  ["refugees","Refugees"],["host","Host community"],["partners","Partners"],["nraions","Raions covered"]];
-function renderAggTable(rows){
+/* ---------- indicator aggregation: card view ----------
+   One card per indicator, grouped by sector. The headline figure is the
+   indicator's grand total run through its own methodology; the split bar
+   shows the refugee / host-community composition of that figure.        */
+let aggSort='value';
+let aggClosed=new Set();
+function setAggSort(v){ aggSort=v; renderTable(filtered()); }
+function toggleAggGroup(key){ if(aggClosed.has(key)) aggClosed.delete(key); else aggClosed.add(key); renderTable(filtered()); }
+const fmtN = v => (v===''||v===null||v===undefined)?'':numOf(v).toLocaleString();
+
+function renderAggCards(rows){
   const agg=aggregateByIndicator(rows);
-  const NUM=new Set(['achievement','refugees','host','partners','nraions']);
-  const thead=document.querySelector('#dataTable thead');
-  const tbody=document.querySelector('#dataTable tbody');
-  document.getElementById('viewHint').textContent='Each row is one indicator, aggregated per its methodology.';
-  thead.innerHTML='<tr>'+AGG_COLS.map(c=>`<th data-c="${c[0]}">${c[1]}${sortState.col===c[0]?(sortState.dir>0?' ▲':' ▼'):''}</th>`).join('')+'</tr>';
-  thead.querySelectorAll('th').forEach(th=>th.onclick=()=>{
-    const c=th.dataset.c; sortState.dir=(sortState.col===c)?-sortState.dir:1; sortState.col=c; renderTable(filtered());
-  });
-  let a=agg.slice();
-  if(sortState.col) a.sort((x,y)=>NUM.has(sortState.col)
-      ? (numOf(x[sortState.col])-numOf(y[sortState.col]))*sortState.dir
-      : String(x[sortState.col]).localeCompare(String(y[sortState.col]))*sortState.dir);
-  tbody.innerHTML=a.map(row=>'<tr>'+AGG_COLS.map(c=>{
-    let v=row[c[0]];
-    if(NUM.has(c[0])) v=(v===''||v===undefined)?'':numOf(v).toLocaleString();
-    const cls=NUM.has(c[0])?' style="text-align:right;font-variant-numeric:tabular-nums"'
-             :(c[0]==='method'?' class="methodtag"':'');
-    return `<td${cls}>${escapeHtml(v)}</td>`;
-  }).join('')+'</tr>').join('');
-  document.getElementById('tableCount').textContent=`${agg.length} indicators (from ${rows.length.toLocaleString()} activity rows)`;
+  const host=document.getElementById('aggView');
+  document.getElementById('viewHint').textContent='One card per indicator, aggregated per its methodology.';
+  document.getElementById('tableCount').textContent=
+    `${agg.length} indicators (from ${rows.length.toLocaleString()} activity rows)`;
   showPager(false);
+
+  if(!agg.length){ host.innerHTML='<div class="aggempty">No indicators match the current filters.</div>'; return; }
+
+  // summary strip — counts only, never a cross-indicator sum of people
+  const sectors=new Set(agg.map(a=>a.sector||'Not specified'));
+  const stats=[
+    [agg.length,'Indicators reported'],
+    [sectors.size,'Sectors'],
+    [distinct(rows,'partner'),'Partners'],
+    [new Set(rows.flatMap(r=>r.raions)).size,'Raions covered'],
+    [rows.length,'Activity rows']
+  ];
+
+  // group by sector
+  const groups=new Map();
+  agg.forEach(a=>{ const s=a.sector||'Not specified'; if(!groups.has(s))groups.set(s,[]); groups.get(s).push(a); });
+  const sorters={
+    value:    (x,y)=>numOf(y.grand)-numOf(x.grand),
+    indicator:(x,y)=>String(x.indicator).localeCompare(String(y.indicator)),
+    partners: (x,y)=>y.partners-x.partners,
+    raions:   (x,y)=>y.nraions-x.nraions
+  };
+  const sorter=sorters[aggSort]||sorters.value;
+  const groupList=[...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
+
+  const card=a=>{
+    const ref=numOf(a.refugees), hst=numOf(a.host), tot=numOf(a.grand);
+    const split=(a.refugees!==''||a.host!=='')&&(ref+hst)>0;
+    const pRef=split?Math.round(ref/(ref+hst)*100):0;
+    const meta=[];
+    if(a.rrpActivity) meta.push(`<span class="tag">${escapeHtml(a.rrpActivity)}</span>`);
+    if(a.outcome)     meta.push(`<span class="tag">${escapeHtml(a.outcome)}</span>`);
+    meta.push(`<span class="tag m nw" title="Aggregation methodology">${escapeHtml(a.method)}</span>`);
+    meta.push(`<span class="tag nw">${a.partners} partner${a.partners===1?'':'s'}</span>`);
+    meta.push(`<span class="tag nw">${a.nraions} raion${a.nraions===1?'':'s'}</span>`);
+    return `<div class="aggcard">
+      <div>
+        <div class="ind">${escapeHtml(a.indicator)}</div>
+        <div class="meta">${meta.join('')}</div>
+      </div>
+      <div class="val">
+        ${tot?`<div class="n">${tot.toLocaleString()}</div><div class="u">${escapeHtml(a.unit||'reported')}</div>`
+             :`<div class="none">not reported</div>`}
+        ${split?`<div class="sbar"><i class="ref" style="width:${pRef}%"></i><i class="host" style="width:${100-pRef}%"></i></div>
+          <div class="splits">${ref?`<span><i style="background:var(--unhcr)"></i>Refugees <b>${fmtN(ref)}</b></span>`:''}
+          ${hst?`<span><i style="background:#9ecae1"></i>Host <b>${fmtN(hst)}</b></span>`:''}</div>`:''}
+      </div>
+    </div>`;
+  };
+
+  host.innerHTML =
+    '<div class="aggtop">'+stats.map(([n,l])=>
+      `<div class="aggstat"><div class="n">${Number(n).toLocaleString()}</div><div class="l">${escapeHtml(l)}</div></div>`).join('')+'</div>'+
+    `<div class="aggctl"><label class="hint">Sort indicators
+       <select id="aggSortSel">
+         <option value="value">Achievement (high → low)</option>
+         <option value="indicator">Indicator (A → Z)</option>
+         <option value="partners">Partners (high → low)</option>
+         <option value="raions">Raions covered (high → low)</option>
+       </select></label>
+       <span class="hint">Click a sector header to collapse it.</span></div>`+
+    groupList.map(([sec,list])=>{
+      const closed=aggClosed.has(sec)?' closed':'';
+      const np=new Set(rows.filter(r=>(r.sectors||[]).includes(sec)).map(r=>r.partner).filter(Boolean)).size;
+      return `<div class="agggroup${closed}">
+        <div class="agghead" data-g="${escapeHtml(sec)}">
+          <span class="caret">${closed?'\u25b8':'\u25be'}</span>
+          <img src="${iconForSector(sec)}" alt="" onerror="this.style.display='none'">
+          <span class="gt">${escapeHtml(sec)}</span>
+          <span class="gm">${list.length} indicator${list.length===1?'':'s'} \u00b7 ${np} partner${np===1?'':'s'}</span>
+        </div>
+        <div class="aggbody">${list.slice().sort(sorter).map(card).join('')}</div>
+      </div>`;
+    }).join('');
+
+  const sel=document.getElementById('aggSortSel');
+  sel.value=aggSort; sel.onchange=()=>setAggSort(sel.value);
+  host.querySelectorAll('.agghead').forEach(h=>h.onclick=()=>toggleAggGroup(h.dataset.g));
 }
 function renderTable(rows){
-  if((state.view||'rows')==='agg') return renderAggTable(rows);
+  if((state.view||'rows')==='agg') return renderAggCards(rows);
   document.getElementById('viewHint').textContent='Each row is one reported activity.';
   if(!tableCols.length) buildTableCols();
   const thead=document.querySelector('#dataTable thead');
@@ -747,6 +869,7 @@ function renderTable(rows){
   tbody.innerHTML=r.slice(start,end).map(row=>'<tr>'+tableCols.map(c=>{
     let v=row[c[0]];
     if(NUMCOLS.has(c[0])) v = (v===""||v===undefined) ? "" : numOf(v).toLocaleString();
+    else if(c[0]==='admin1'||c[0]==='scope') v = dispList(v);
     return `<td${NUMCOLS.has(c[0])?' style="text-align:right;font-variant-numeric:tabular-nums"':''}>${escapeHtml(v)}</td>`;
   }).join('')+'</tr>').join('');
   document.getElementById('tableCount').textContent=
@@ -772,11 +895,11 @@ function buildDropdowns(){
   document.querySelectorAll('.dd').forEach(dd=>{
     const dim=dd.dataset.dim;
     let vals;
-    if(dim==='admin1'){ vals=MOLDOVA_GEOJSON.features.map(f=>f.properties.name).sort(); }
+    if(dim==='admin1'){ vals=MOLDOVA_GEOJSON.features.map(f=>f.properties.name).sort((a,b)=>dispName(a).localeCompare(dispName(b))); }
     else if(dim==='sector'){ const s=new Set(); state.data.forEach(r=>r.sectors.forEach(x=>s.add(x))); vals=[...s].sort(); }
     else { vals=[...new Set(state.data.map(r=>r[dim]).filter(Boolean))].sort(); }
     const menu=dd.querySelector('.menu');
-    menu.innerHTML=vals.map(v=>`<label><input type="checkbox" value="${escapeHtml(v)}"> ${escapeHtml(v)}</label>`).join('')||'<div class="hint" style="padding:6px">no values</div>';
+    menu.innerHTML=vals.map(v=>`<label><input type="checkbox" value="${escapeHtml(v)}"> ${escapeHtml(dim==='admin1'?dispName(v):v)}</label>`).join('')||'<div class="hint" style="padding:6px">no values</div>';
     menu.querySelectorAll('input').forEach(cb=>cb.onchange=()=>{ toggleFilter(dim,cb.value); });
     dd.querySelector('button').onclick=(e)=>{e.stopPropagation();document.querySelectorAll('.dd').forEach(o=>{if(o!==dd)o.classList.remove('open');});dd.classList.toggle('open');};
   });
@@ -792,7 +915,8 @@ function syncDropdowns(){
 document.addEventListener('click',()=>document.querySelectorAll('.dd').forEach(d=>d.classList.remove('open')));
 function renderActiveFilters(){
   const parts=[];
-  for(const [dim,set] of Object.entries(state.filters)) if(set.size) parts.push(`${dim}: ${[...set].join(', ')}`);
+  for(const [dim,set] of Object.entries(state.filters)) if(set.size)
+    parts.push(`${dim}: ${[...set].map(v=>dim==='admin1'?dispName(v):v).join(', ')}`);
   document.getElementById('activef').textContent=parts.join('  |  ');
 }
 
