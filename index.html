@@ -104,37 +104,63 @@ thead th{position:sticky;top:0;background:var(--unhcr);color:#fff;text-align:lef
 thead th:hover{background:var(--unhcr-d)}
 tbody td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
 tbody tr:nth-child(even){background:#f7fafc}
-/* partner activities — card view */
+/* partner activities — accordion list */
 .layoutsw{display:flex;margin-left:10px}
 .lsw{border:1px solid var(--line);background:#fff;color:var(--muted);font-size:11px;font-weight:600;padding:4px 9px;cursor:pointer}
 .lsw:first-child{border-radius:4px 0 0 4px}
 .lsw:last-child{border-radius:0 4px 4px 0;border-left:0}
 .lsw.on{background:#e8f2fb;color:var(--unhcr-d);border-color:#bcd9ef}
-.rowsview{max-height:560px;overflow-y:auto;overflow-x:hidden;padding-right:2px}
-.rowsctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 8px}
-.rowsctl select{font-size:11.5px;padding:3px 6px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
-.acards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.acard{border:1px solid var(--line);border-left:3px solid var(--unhcr);border-radius:6px;background:#fff;padding:9px 11px;display:flex;flex-direction:column;gap:6px;min-width:0}
-.acard:hover{box-shadow:0 2px 10px rgba(0,60,110,.09)}
-.acard .top{display:flex;align-items:flex-start;gap:8px}
-.acard .pn{font-size:12.5px;font-weight:800;color:var(--unhcr-d);line-height:1.3;min-width:0;overflow-wrap:anywhere}
-.acard .pn small{display:block;font-weight:600;color:var(--muted);font-size:10.5px;margin-top:1px}
-.acard .st{margin-left:auto;font-size:10px;font-weight:700;border-radius:10px;padding:2px 8px;white-space:nowrap;background:#eef3f7;color:var(--muted)}
-.acard .st.on{background:#e6f4ea;color:#1d6c37}
-.acard .st.done{background:#e8f2fb;color:var(--unhcr-d)}
-.acard .ttl{font-size:12px;font-weight:600;color:var(--ink);line-height:1.35;overflow-wrap:anywhere}
-.acard .ind{font-size:11px;color:#54646f;line-height:1.4;border-left:2px solid #dbe9f6;padding-left:7px;overflow-wrap:anywhere}
-.acard .nums{display:flex;gap:6px;flex-wrap:wrap}
-.num{border:1px solid var(--line);border-radius:5px;padding:3px 8px;background:#fbfcfd;min-width:70px}
-.num .n{font-size:14px;font-weight:800;color:var(--unhcr);font-variant-numeric:tabular-nums;line-height:1.2}
-.num .l{font-size:9.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
-.acard .foot{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:2px;border-top:1px dashed var(--line)}
-.acard .foot .tag{padding-top:2px}
-.tag.loc{color:var(--unhcr-d);border-color:#bcd9ef;background:#f2f9ff}
-.tag.sec{display:inline-flex;align-items:center;gap:4px}
-.tag.sec img{height:12px;width:auto}
+.rowsview{max-height:600px;overflow-y:auto;overflow-x:hidden;padding-right:2px}
+.rowsctl{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:0 0 8px}
+.rowsctl select{font-size:11.5px;padding:4px 6px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
+.searchbox{flex:1;min-width:200px;max-width:340px;padding:5px 10px;border:1px solid var(--line);border-radius:5px;font-family:inherit;font-size:12px;color:var(--ink)}
+.btn-sm{padding:4px 10px;border:1px solid var(--line);background:#fff;border-radius:5px;cursor:pointer;font-family:inherit;font-size:11.5px;color:var(--muted);font-weight:700}
+.btn-sm:hover{background:var(--panel)}
+
+/* shared accordion */
+.acc-group{border:1px solid var(--line);border-radius:6px;margin-bottom:6px;overflow:hidden;background:#fff}
+.acc-head{display:flex;align-items:center;gap:9px;padding:8px 11px;cursor:pointer;user-select:none;background:#fff;border-left:3px solid var(--unhcr)}
+.acc-head:hover{background:#f5f9fc}
+.acc-head .chev{font-size:9px;color:var(--muted);flex:0 0 auto;transition:transform .15s}
+.acc-group.open>.acc-head .chev{transform:rotate(90deg)}
+.acc-head .a-title{flex:1;font-weight:800;font-size:12.5px;color:var(--unhcr-d);line-height:1.35;min-width:0;overflow-wrap:anywhere}
+.acc-head .a-cnt{font-size:11px;color:var(--muted);white-space:nowrap}
+.acc-head .a-val{font-size:13px;font-weight:800;color:var(--unhcr);white-space:nowrap;font-variant-numeric:tabular-nums}
+.acc-head .a-unit{font-size:9.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+.acc-body{display:none}
+.acc-group.open>.acc-body{display:block}
+.acc-sub{border:0;border-top:1px solid var(--line);border-radius:0;margin:0}
+.acc-sub>.acc-head{background:#f3f8fc;border-left:0;padding:7px 11px 7px 24px}
+.acc-sub>.acc-head:hover{background:#e8f2fb}
+.acc-sub>.acc-head .a-title{font-size:12px;font-weight:600;color:var(--ink)}
+.badge{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10px;font-weight:700;background:#eef3f7;color:var(--muted);vertical-align:1px;white-space:nowrap}
+.badge.type{background:#e8f2fb;color:var(--unhcr-d)}
+.badge.on{background:#e6f4ea;color:#1d6c37}
+.badge.done{background:#e8f2fb;color:var(--unhcr-d)}
+
+/* activity lines inside a project */
+.lhdr,.lrow{display:grid;grid-template-columns:1fr 130px 152px 74px 74px 74px;gap:9px;align-items:center;padding:6px 11px 6px 40px}
+.lhdr{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:700;border-top:1px solid var(--line);background:#fbfcfd}
+.lrow{font-size:11.5px;border-top:1px solid #f2f5f8;color:var(--ink)}
+.lrow:hover{background:#f7fafc}
+.lrow .ind{line-height:1.4;overflow-wrap:anywhere}
+.lrow .sub{font-size:10.5px;color:var(--muted);margin-top:2px;display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.lrow .sub img{height:11px;width:auto;vertical-align:-1px}
+.lhdr .num,.lrow .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lrow .num{font-weight:700;color:var(--unhcr-d)}
+.lrow .num.z{font-weight:400;color:var(--muted)}
+.lrow .loc{font-size:11px;color:#54646f;overflow-wrap:anywhere}
+.lrow .dt{font-size:10.5px;color:#54646f;white-space:nowrap;font-variant-numeric:tabular-nums}
 .rowsempty{padding:14px;color:var(--muted);font-size:12px;text-align:center;border:1px dashed var(--line);border-radius:6px}
-@media(max-width:900px){.acards{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .lhdr{display:none}
+  .lrow{grid-template-columns:1fr;gap:3px;padding:8px 11px 8px 24px}
+  .lrow .num{text-align:left}
+  .lrow .num::before{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px;margin-right:5px;font-weight:700}
+  .lrow .n-r::before{content:'Refugees: '}
+  .lrow .n-h::before{content:'Host: '}
+  .lrow .n-t::before{content:'Total: '}
+}
 
 /* indicator aggregation — card view */
 .aggview{margin-top:2px;max-height:560px;overflow-y:auto;overflow-x:hidden;padding-right:2px}
@@ -266,7 +292,7 @@ body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
       <button class="tgl on" id="tglRows" onclick="setView('rows')">Partner activities</button>
       <button class="tgl" id="tglAgg" onclick="setView('agg')">Indicator aggregation</button>
       <span class="layoutsw" id="layoutsw">
-        <button class="lsw on" id="lswCards" onclick="setRowLayout('cards')" title="Card view">▤ Cards</button>
+        <button class="lsw on" id="lswList" onclick="setRowLayout('list')" title="Grouped list">▤ List</button>
         <button class="lsw" id="lswTable" onclick="setRowLayout('table')" title="Table view">≡ Table</button>
       </span>
       <span class="hint" id="viewHint"></span>
@@ -880,89 +906,130 @@ function renderAggCards(rows){
   sel.value=aggSort; sel.onchange=()=>setAggSort(sel.value);
   host.querySelectorAll('.agghead').forEach(h=>h.onclick=()=>toggleAggGroup(h.dataset.g));
 }
-/* ---------- partner activities: card view ----------
-   Same rows, same filters, same pager as the table — one card per reported
-   activity, with the achievement figures pulled out as the focal point.  */
-let rowLayout='cards';
+/* ---------- partner activities: accordion list ----------
+   Partner -> project -> activity lines. Same rows and filters as the table,
+   collapsed by default so the section stays light.                       */
+let rowLayout='list';
 let rowSort='partner';
+let rowQuery='';
+let openGroups=new Set();
 function applyRowLayout(){
   const agg=(state.view||'rows')==='agg';
-  document.getElementById('tableScroll').style.display = (agg||rowLayout==='cards')?'none':'';
-  document.getElementById('rowsView').style.display    = (agg||rowLayout!=='cards')?'none':'';
-  document.getElementById('lswCards').classList.toggle('on',rowLayout==='cards');
+  document.getElementById('tableScroll').style.display = (agg||rowLayout==='list')?'none':'';
+  document.getElementById('rowsView').style.display    = (agg||rowLayout!=='list')?'none':'';
+  document.getElementById('lswList').classList.toggle('on',rowLayout==='list');
   document.getElementById('lswTable').classList.toggle('on',rowLayout==='table');
 }
 function setRowLayout(v){ rowLayout=v; state.page=0; applyRowLayout(); renderTable(filtered()); }
-function setRowSort(v){ rowSort=v; state.page=0; renderTable(filtered()); }
+function setRowSort(v){ rowSort=v; renderTable(filtered()); }
 const ROW_SORTS={
-  partner:    ['Partner (A \u2192 Z)',      (a,b)=>String(a.partner).localeCompare(String(b.partner))],
-  achievement:['Achievement (high \u2192 low)',(a,b)=>numOf(b.grand)-numOf(a.grand)],
-  sector:     ['Sector (A \u2192 Z)',       (a,b)=>String(a.sector).localeCompare(String(b.sector))],
-  start:      ['Start date (newest first)',(a,b)=>String(b.startDate).localeCompare(String(a.startDate))],
-  end:        ['End date (soonest first)', (a,b)=>String(a.endDate).localeCompare(String(b.endDate))],
-  location:   ['Location (A \u2192 Z)',     (a,b)=>dispList(a.admin1||a.scope).localeCompare(dispList(b.admin1||b.scope))]
+  partner:    ['Partner (A \u2192 Z)',            (a,b)=>String(a.k).localeCompare(String(b.k))],
+  activities: ['Activity lines (most first)',   (a,b)=>b.rows.length-a.rows.length],
+  achievement:['People reached (high \u2192 low)',(a,b)=>b.reached-a.reached]
 };
 const fmtDate = d => { const s=String(d||'').trim(); return /^\d{4}-\d{2}-\d{2}/.test(s)?s.slice(0,10):s; };
-function statusClass(s){ const n=norm(s);
-  if(n.includes('ongoing')||n.includes('active')||n.includes('implement')) return 'on';
-  if(n.includes('complete')||n.includes('finish')||n.includes('closed')) return 'done';
-  return ''; }
-
-function activityCard(r){
-  const nums=[];
-  if(r.achievement!=='') nums.push([r.achievement,'Total']);
-  if(r.refugees!=='')    nums.push([r.refugees,'Refugees']);
-  if(r.host!=='')        nums.push([r.host,'Host community']);
-  const locs=dispList(r.admin1||r.scope).split(', ').filter(Boolean);
+function statusBadge(s){ const n=norm(s); if(!s) return '';
+  const c=(n.includes('ongoing')||n.includes('active')||n.includes('implement'))?'on'
+        :(n.includes('complete')||n.includes('finish')||n.includes('closed'))?'done':'';
+  return `<span class="badge ${c}">${escapeHtml(s)}</span>`; }
+function setRowQuery(q){ rowQuery=q.trim().toLowerCase(); renderTable(filtered()); }
+function expandAllRows(open){
+  document.querySelectorAll('#rowsView .acc-group').forEach(g=>{
+    g.classList.toggle('open',open); if(open) openGroups.add(g.dataset.k); else openGroups.delete(g.dataset.k);
+  });
+}
+function matchesQuery(r){
+  if(!rowQuery) return true;
+  return [r.partner,r.project,r.activity,r.indicator,r.sector,r.outcome,r.agency,r.orgType,
+          dispList(r.admin1||r.scope)].join(' ').toLowerCase().includes(rowQuery);
+}
+function activityLine(r){
+  const cell=(v,cls)=>{ const n=numOf(v);
+    return `<div class="num ${cls}${v===''||!n?' z':''}">${v===''?'\u2013':n.toLocaleString()}</div>`; };
+  const loc=dispList(r.admin1||r.scope)||(r.countrywide?'Country-wide':'\u2013');
   const dates=[fmtDate(r.startDate),fmtDate(r.endDate)].filter(Boolean).join(' \u2192 ');
-  const foot=[];
-  (r.sectors||[]).forEach(sec=>foot.push(
-    `<span class="tag sec"><img src="${iconForSector(sec)}" alt="" onerror="this.style.display='none'">${escapeHtml(sec)}</span>`));
-  if(locs.length) foot.push(locs.map(l=>`<span class="tag loc nw">${escapeHtml(l)}</span>`).join(''));
-  else if(r.countrywide) foot.push('<span class="tag loc nw">Country-wide</span>');
-  if(dates) foot.push(`<span class="tag nw">${escapeHtml(dates)}</span>`);
-  if(r.modality) foot.push(`<span class="tag">${escapeHtml(r.modality)}</span>`);
-  return `<div class="acard">
-    <div class="top">
-      <div class="pn">${escapeHtml(r.partner||'(partner not stated)')}
-        <small>${escapeHtml([r.orgType,r.agency].filter(Boolean).join(' \u00b7 '))}</small></div>
-      ${r.status?`<span class="st ${statusClass(r.status)}">${escapeHtml(r.status)}</span>`:''}
-    </div>
-    ${r.activity?`<div class="ttl">${escapeHtml(r.activity)}</div>`:''}
-    ${r.indicator?`<div class="ind">${escapeHtml(r.indicator)}</div>`:''}
-    ${nums.length?`<div class="nums">${nums.map(([v,l])=>
-      `<div class="num"><div class="n">${numOf(v).toLocaleString()}</div><div class="l">${l}</div></div>`).join('')}</div>`:''}
-    <div class="foot">${foot.join('')}</div>
+  const sec=(r.sectors||[]).map(x=>
+    `<span><img src="${iconForSector(x)}" alt="" onerror="this.style.display='none'"> ${escapeHtml(x)}</span>`).join('');
+  return `<div class="lrow">
+    <div><div class="ind">${escapeHtml(r.indicator||r.activity||'(no indicator)')}</div>
+      <div class="sub">${sec}${r.status?statusBadge(r.status):''}</div></div>
+    <div class="loc">${escapeHtml(loc)}</div>
+    <div class="dt">${escapeHtml(dates||'\u2013')}</div>
+    ${cell(r.refugees,'n-r')}${cell(r.host,'n-h')}${cell(r.achievement,'n-t')}
   </div>`;
 }
-
-function renderRowsCards(rows){
+function projectGroup(title,rows,key){
+  const open=openGroups.has(key)?' open':'';
+  return `<div class="acc-group acc-sub${open}" data-k="${escapeHtml(key)}">
+    <div class="acc-head"><span class="chev">\u25b6</span>
+      <span class="a-title">${escapeHtml(title||'(project title not stated)')}</span>
+      <span class="a-cnt">${rows.length} line${rows.length===1?'':'s'}</span></div>
+    <div class="acc-body">
+      <div class="lhdr"><div>Indicator</div><div>Location</div><div>Period</div>
+        <div class="num">Refugees</div><div class="num">Host</div><div class="num">Total</div></div>
+      ${rows.map(activityLine).join('')}
+    </div></div>`;
+}
+function renderRowsList(rows){
   const host=document.getElementById('rowsView');
-  const r=rows.slice().sort((ROW_SORTS[rowSort]||ROW_SORTS.partner)[1]);
-  const total=r.length;
-  const size=(state.pageSize==='all')?total:(state.pageSize||500);
-  const pages=Math.max(1,Math.ceil(total/(size||1)));
-  if(state.page>=pages) state.page=pages-1;
-  if(state.page<0) state.page=0;
-  const start=(size===total||size===0)?0:state.page*size;
-  const end=Math.min(total,start+(size||total));
-  const ctl=`<div class="rowsctl"><label class="hint">Sort activities
-      <select id="rowSortSel">${Object.entries(ROW_SORTS).map(([k,v])=>
-        `<option value="${k}">${v[0]}</option>`).join('')}</select></label></div>`;
-  host.innerHTML = total
-    ? ctl+'<div class="acards">'+r.slice(start,end).map(activityCard).join('')+'</div>'
-    : ctl+'<div class="rowsempty">No activities match the current filters.</div>';
+  const hits=rows.filter(matchesQuery);
+  const ctl=`<div class="rowsctl">
+      <input class="searchbox" id="rowSearch" type="text" placeholder="Search partner, project, indicator, location\u2026" value="${escapeHtml(rowQuery)}">
+      <label class="hint">Sort <select id="rowSortSel">${Object.entries(ROW_SORTS).map(([k,v])=>
+        `<option value="${k}">${v[0]}</option>`).join('')}</select></label>
+      <button class="btn-sm" id="rowExpand">Expand all</button>
+      <button class="btn-sm" id="rowCollapse">Collapse all</button>
+    </div>`;
+  // partner -> project -> lines
+  const byPartner=new Map();
+  hits.forEach(r=>{ const k=r.partner||'(partner not stated)';
+    if(!byPartner.has(k)) byPartner.set(k,[]); byPartner.get(k).push(r); });
+  const groups=[...byPartner.entries()].map(([k,rs])=>({
+    k, rows:rs,
+    reached:rs.reduce((s,r)=>s+numOf(r.grand),0),
+    orgType:rs[0].orgType, agency:rs[0].agency,
+    projects:new Set(rs.map(r=>r.project||r.activity||'')).size
+  })).sort((ROW_SORTS[rowSort]||ROW_SORTS.partner)[1]);
+
+  host.innerHTML = ctl + (groups.length ? groups.map(g=>{
+    const open=openGroups.has(g.k)?' open':'';
+    const byProject=new Map();
+    g.rows.forEach(r=>{ const p=r.project||r.activity||''; if(!byProject.has(p)) byProject.set(p,[]); byProject.get(p).push(r); });
+    const inner=[...byProject.entries()]
+      .sort((a,b)=>String(a[0]).localeCompare(String(b[0])))
+      .map(([p,rs])=>projectGroup(p,rs,g.k+'||'+p)).join('');
+    return `<div class="acc-group${open}" data-k="${escapeHtml(g.k)}">
+      <div class="acc-head"><span class="chev">\u25b6</span>
+        <span class="a-title">${escapeHtml(g.k)} ${g.orgType?`<span class="badge type">${escapeHtml(g.orgType)}</span>`:''}</span>
+        <span class="a-cnt">${g.projects} project${g.projects===1?'':'s'} \u00b7 ${g.rows.length} line${g.rows.length===1?'':'s'}</span>
+        <span class="a-val" title="People reached across this partner's reported lines">${g.reached.toLocaleString()}</span><span class="a-unit">reached</span></div>
+      <div class="acc-body">${inner}</div></div>`;
+  }).join('') : '<div class="rowsempty">No activities match the current filters.</div>');
+
+  host.querySelectorAll('.acc-head').forEach(h=>h.onclick=e=>{
+    e.stopPropagation();
+    const g=h.parentElement, k=g.dataset.k;
+    const open=g.classList.toggle('open');
+    if(open) openGroups.add(k); else openGroups.delete(k);
+  });
   const sel=document.getElementById('rowSortSel'); sel.value=rowSort; sel.onchange=()=>setRowSort(sel.value);
-  document.getElementById('tableCount').textContent=
-    total?`Showing ${(start+1).toLocaleString()}\u2013${end.toLocaleString()} of ${total.toLocaleString()} activities`
-         :'No activities match the current filters';
-  showPager(true,pages);
+  document.getElementById('rowExpand').onclick=()=>expandAllRows(true);
+  document.getElementById('rowCollapse').onclick=()=>expandAllRows(false);
+  const sb=document.getElementById('rowSearch');
+  sb.oninput=()=>{ const pos=sb.selectionStart; setRowQuery(sb.value);
+    const nb=document.getElementById('rowSearch'); nb.focus(); nb.setSelectionRange(pos,pos); };
+
+  document.getElementById('tableCount').textContent = hits.length
+    ? `${hits.length.toLocaleString()} activit${hits.length===1?'y':'ies'} from ${groups.length} partner${groups.length===1?'':'s'}`
+      +(rowQuery?` (filtered by "${rowQuery}")`:'')
+    : 'No activities match the current filters';
+  showPager(false);
 }
 function renderTable(rows){
   applyRowLayout();
   if((state.view||'rows')==='agg') return renderAggCards(rows);
-  document.getElementById('viewHint').textContent='Each card is one reported activity.';
-  if(rowLayout==='cards') return renderRowsCards(rows);
+  document.getElementById('viewHint').textContent='Grouped by partner and project \u2014 expand to see the reported lines.';
+  if(rowLayout==='list') return renderRowsList(rows);
   document.getElementById('viewHint').textContent='Each row is one reported activity.';
   if(!tableCols.length) buildTableCols();
   const thead=document.querySelector('#dataTable thead');
@@ -1005,7 +1072,7 @@ function showPager(show,pages){
 }
 function setPageSize(v){ state.pageSize=(v==='all')?'all':parseInt(v,10); state.page=0; renderTable(filtered()); }
 function pageStep(d){ state.page=(state.page||0)+d; renderTable(filtered());
-  const box=(rowLayout==='cards'&&(state.view||'rows')!=='agg')
+  const box=(rowLayout==='list'&&(state.view||'rows')!=='agg')
     ? document.getElementById('rowsView') : document.querySelector('.tbl-scroll');
   if(box) box.scrollTop=0; }
 function escapeHtml(s){return String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));}
