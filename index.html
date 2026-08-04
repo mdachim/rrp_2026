@@ -1073,7 +1073,7 @@ function activityLine(r){
     `<span><img src="${iconForSector(x)}" alt="" onerror="this.style.display='none'"> ${escapeHtml(x)}</span>`).join('');
   return `<div class="lrow">
     <div><div class="ind">${escapeHtml(r.indicator||r.activity||'(no indicator)')}</div>
-      <div class="sub">${sec}${r.status?statusBadge(r.status):''}${r.agency?`<span class="via" title="Mandated by ${escapeHtml(r.agency)}">via ${escapeHtml(agencyShort(r.agency))}</span>`:''}</div></div>
+      <div class="sub">${sec}${r.status?statusBadge(r.status):''}</div></div>
     <div class="loc">${escapeHtml(loc)}</div>
     <div class="dt">${escapeHtml(dates||'\u2013')}</div>
     ${cell(r.refugees,'n-r')}${cell(r.host,'n-h')}${cell(r.achievement,'n-t')}
@@ -1083,7 +1083,7 @@ function projectGroup(title,rows,key){
   const open=openGroups.has(key)?' open':'';
   return `<div class="acc-group acc-sub${open}" data-k="${escapeHtml(key)}">
     <div class="acc-head"><span class="chev">\u25b6</span>
-      <span class="a-title">${escapeHtml(title||'(project title not stated)')}</span>
+      <span class="a-title">${escapeHtml(title||'(project title not stated)')}${agencyBadges(agenciesOf(rows))}</span>
       <span class="a-cnt">${rows.length} line${rows.length===1?'':'s'}</span></div>
     <div class="acc-body">
       <div class="lhdr"><div>Indicator</div><div>Location</div><div>Period</div>
@@ -1108,7 +1108,7 @@ function renderRowsList(rows){
   const groups=[...byPartner.entries()].map(([k,rs])=>({
     k, rows:rs,
     reached:rs.reduce((s,r)=>s+numOf(r.grand),0),
-    orgType:rs[0].orgType, agencies:agenciesOf(rs),
+    orgType:rs[0].orgType,
     projects:new Set(rs.map(r=>r.project||r.activity||'')).size
   })).sort((ROW_SORTS[rowSort]||ROW_SORTS.partner)[1]);
 
@@ -1121,7 +1121,7 @@ function renderRowsList(rows){
       .map(([p,rs])=>projectGroup(p,rs,g.k+'||'+p)).join('');
     return `<div class="acc-group${open}" data-k="${escapeHtml(g.k)}">
       <div class="acc-head"><span class="chev">\u25b6</span>
-        <span class="a-title">${escapeHtml(g.k)} ${g.orgType?`<span class="badge type">${escapeHtml(g.orgType)}</span>`:''}${agencyBadges(g.agencies)}</span>
+        <span class="a-title">${escapeHtml(g.k)} ${g.orgType?`<span class="badge type">${escapeHtml(g.orgType)}</span>`:''}</span>
         <span class="a-cnt">${g.projects} project${g.projects===1?'':'s'} \u00b7 ${g.rows.length} line${g.rows.length===1?'':'s'}</span>
         <span class="a-val" title="People reached across this partner's reported lines">${g.reached.toLocaleString()}</span><span class="a-unit">reached</span></div>
       <div class="acc-body">${inner}</div></div>`;
