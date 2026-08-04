@@ -26,8 +26,14 @@ Live dashboard: https://mdachim.github.io/rrp_2026/
     remains available.
   - *Indicator aggregation* — indicators grouped by sector, each aggregated
     per its methodology and tracked against its **2026 target**, with a
-    progress bar and a partner-level breakdown. Clicking a partner in that
-    breakdown filters the whole dashboard.
+    progress bar and a partner-level breakdown showing each partner's
+    mandating agency. Clicking a partner in that breakdown filters the whole
+    dashboard.
+
+Partners implementing under a mandating agency are marked with a `via <agency>`
+badge — on the partner header and the activity line in *Partner activities*,
+and in the *Mandating agency* column of the indicator breakdown. Agencies are
+shown as acronyms, with the full name in the tooltip.
 
 The Left Bank of Dniester is labelled as such throughout the dashboard; the
 underlying data and the map boundaries keep their source value

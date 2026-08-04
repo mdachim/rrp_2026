@@ -137,6 +137,10 @@ tbody tr:nth-child(even){background:#f7fafc}
 .badge.type{background:#e8f2fb;color:var(--unhcr-d)}
 .badge.on{background:#e6f4ea;color:#1d6c37}
 .badge.done{background:#e8f2fb;color:var(--unhcr-d)}
+.badge.via{background:#f3eefb;color:#5b3f96;margin-left:4px}
+.via{font-size:10px;font-weight:700;color:#5b3f96;background:#f3eefb;border-radius:9px;padding:1px 7px;white-space:nowrap}
+.ptbl td.ag{white-space:normal}
+.ptbl td.ag .badge.via{margin:0 4px 2px 0}
 
 /* activity lines inside a project */
 .lhdr,.lrow{display:grid;grid-template-columns:1fr 130px 152px 74px 74px 74px;gap:9px;align-items:center;padding:6px 11px 6px 40px}
@@ -918,11 +922,12 @@ function renderAggList(rows){
       const ach=rsP.length?achievedFor(rsP,a.method):'';
       const tp=tByP.get(norm(p));
       const active=state.filters.partner.has(p);
-      return {p,ach,tgt:tp?tp.target:'',reporting:!!rsP.length,active};
+      return {p,ach,tgt:tp?tp.target:'',reporting:!!rsP.length,active,agencies:agenciesOf(rsP)};
     }).sort((x,y)=>numOf(y.ach)-numOf(x.ach)||String(x.p).localeCompare(String(y.p)));
     const body=lines.map(l=>
       `<tr class="${l.reporting?'clickable':''}${l.active?' on':''}"${l.reporting?` data-p="${escapeHtml(l.p)}"`:''}>
         <td class="pn">${escapeHtml(l.p)}${l.reporting?'':' <span class="hint">(no reporting yet)</span>'}</td>
+        <td class="ag">${l.agencies.length?agencyBadges(l.agencies):'<span class="hint">–</span>'}</td>
         <td class="num">${l.tgt===''?'–':fmtN(l.tgt)}</td>
         <td class="num">${l.ach===''?'–':fmtN(l.ach)}</td>
         <td class="flt">${l.active?'filtered':''}</td></tr>`).join('');
@@ -939,7 +944,7 @@ function renderAggList(rows){
       </div>
       ${a.rrpActivity?`<div class="hint">${escapeHtml(a.rrpActivity)}</div>`:''}
       <div class="cap">Partners — click one to filter the whole dashboard</div>
-      <table class="ptbl"><thead><tr><th>Partner</th><th class="num">Target 2026</th>
+      <table class="ptbl"><thead><tr><th>Partner</th><th>Mandating agency</th><th class="num">Target 2026</th>
         <th class="num">Achieved</th><th></th></tr></thead><tbody>${body}</tbody></table>
     </div>`;
   };
@@ -1024,6 +1029,26 @@ const ROW_SORTS={
   achievement:['People reached (high \u2192 low)',(a,b)=>b.reached-a.reached]
 };
 const fmtDate = d => { const s=String(d||'').trim(); return /^\d{4}-\d{2}-\d{2}/.test(s)?s.slice(0,10):s; };
+/* Mandating agency shown as an acronym to keep the lists readable; the full
+   name stays in the title attribute. Unknown agencies keep their own text. */
+const AGENCY_SHORT={
+  "united nations high commissioner for refugees":"UNHCR",
+  "united nations population fund":"UNFPA",
+  "united nations children's fund":"UNICEF",
+  "united nations childrens fund":"UNICEF",
+  "un women":"UN Women",
+  "world food programme":"WFP",
+  "international organization for migration":"IOM",
+  "church world service":"CWS",
+  "people in need":"PIN",
+  "[other]":"Other agency"
+};
+const agencyShort = a => AGENCY_SHORT[norm(a)] || String(a||'');
+/* distinct mandating agencies across a set of rows */
+const agenciesOf = rs => [...new Set(rs.map(r=>r.agency).filter(Boolean))];
+function agencyBadges(list){
+  return list.map(a=>`<span class="badge via" title="Mandated by ${escapeHtml(a)}">via ${escapeHtml(agencyShort(a))}</span>`).join('');
+}
 function statusBadge(s){ const n=norm(s); if(!s) return '';
   const c=(n.includes('ongoing')||n.includes('active')||n.includes('implement'))?'on'
         :(n.includes('complete')||n.includes('finish')||n.includes('closed'))?'done':'';
@@ -1048,7 +1073,7 @@ function activityLine(r){
     `<span><img src="${iconForSector(x)}" alt="" onerror="this.style.display='none'"> ${escapeHtml(x)}</span>`).join('');
   return `<div class="lrow">
     <div><div class="ind">${escapeHtml(r.indicator||r.activity||'(no indicator)')}</div>
-      <div class="sub">${sec}${r.status?statusBadge(r.status):''}</div></div>
+      <div class="sub">${sec}${r.status?statusBadge(r.status):''}${r.agency?`<span class="via" title="Mandated by ${escapeHtml(r.agency)}">via ${escapeHtml(agencyShort(r.agency))}</span>`:''}</div></div>
     <div class="loc">${escapeHtml(loc)}</div>
     <div class="dt">${escapeHtml(dates||'\u2013')}</div>
     ${cell(r.refugees,'n-r')}${cell(r.host,'n-h')}${cell(r.achievement,'n-t')}
@@ -1083,7 +1108,7 @@ function renderRowsList(rows){
   const groups=[...byPartner.entries()].map(([k,rs])=>({
     k, rows:rs,
     reached:rs.reduce((s,r)=>s+numOf(r.grand),0),
-    orgType:rs[0].orgType, agency:rs[0].agency,
+    orgType:rs[0].orgType, agencies:agenciesOf(rs),
     projects:new Set(rs.map(r=>r.project||r.activity||'')).size
   })).sort((ROW_SORTS[rowSort]||ROW_SORTS.partner)[1]);
 
@@ -1096,7 +1121,7 @@ function renderRowsList(rows){
       .map(([p,rs])=>projectGroup(p,rs,g.k+'||'+p)).join('');
     return `<div class="acc-group${open}" data-k="${escapeHtml(g.k)}">
       <div class="acc-head"><span class="chev">\u25b6</span>
-        <span class="a-title">${escapeHtml(g.k)} ${g.orgType?`<span class="badge type">${escapeHtml(g.orgType)}</span>`:''}</span>
+        <span class="a-title">${escapeHtml(g.k)} ${g.orgType?`<span class="badge type">${escapeHtml(g.orgType)}</span>`:''}${agencyBadges(g.agencies)}</span>
         <span class="a-cnt">${g.projects} project${g.projects===1?'':'s'} \u00b7 ${g.rows.length} line${g.rows.length===1?'':'s'}</span>
         <span class="a-val" title="People reached across this partner's reported lines">${g.reached.toLocaleString()}</span><span class="a-unit">reached</span></div>
       <div class="acc-body">${inner}</div></div>`;
