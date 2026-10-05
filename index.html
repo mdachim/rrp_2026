@@ -228,7 +228,6 @@ tbody tr:nth-child(even){background:#f7fafc}
 body.fitmode{width:1360px}
 body.fitmode .app{max-width:1360px}
 body.fitmode .grid{grid-template-columns:1.15fr 1.5fr 1.4fr 1.4fr}
-html.embedded .app{min-height:0}
 </style>
 </head>
 <body>
@@ -1258,23 +1257,6 @@ function applyFit(){
   if(state.map) setTimeout(()=>state.map.invalidateSize(),50);
 }
 window.addEventListener('resize',applyFit);
-
-/* iframe auto-height: post the page height to the embedding page whenever it changes */
-(function(){
-  if(window.self===window.top) return;
-  document.documentElement.classList.add('embedded');
-  let last=0;
-  function post(){
-    const r=document.querySelector('.app').getBoundingClientRect();
-    const h=Math.ceil(r.bottom+window.scrollY);
-    if(h===last) return;
-    last=h;
-    window.parent.postMessage({type:'rrp2026-height',height:h},'*');
-  }
-  new ResizeObserver(post).observe(document.querySelector('.app'));
-  window.addEventListener('load',post);
-  window.addEventListener('resize',post);
-})();
 
 /* ---------- reference tables ---------- */
 async function fetchJson(path){

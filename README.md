@@ -101,28 +101,6 @@ Indicators are joined to their achievements by indicator name, so the wording
 must stay identical to the reporting form; an indicator without a matching
 target is shown as "no target".
 
-## Embedding (iframe)
-
-Paste this into the data portal (HTML / embed block). The dashboard scales to
-the container width, and the script grows the iframe to the full page height:
-
-```html
-<iframe id="rrp2026" src="https://mdachim.github.io/rrp_2026/"
-  title="Refugee Response 2026: Partners' Achievements — Republic of Moldova"
-  style="width:100%;height:1100px;border:0;display:block" scrolling="no" loading="lazy"></iframe>
-<script>
-window.addEventListener('message', function (e) {
-  if (e.origin === 'https://mdachim.github.io' && e.data && e.data.type === 'rrp2026-height') {
-    document.getElementById('rrp2026').style.height = e.data.height + 'px';
-  }
-});
-</script>
-```
-
-If the portal strips `<script>` tags, keep only the iframe: it still fills the
-width, and the fixed `height` (1100px suits a full-width desktop layout) sets
-the length. Add `?fit=0` to the URL to turn off the scale-to-width behaviour.
-
 ## Technology
 
 Single-page HTML/JavaScript application with no build step or backend:
